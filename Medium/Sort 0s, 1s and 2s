@@ -1,0 +1,25 @@
+class Solution {
+    // Function to sort an array of 0s, 1s, and 2s
+    public void sort012(ArrayList<Integer> arr) {
+        // code here
+        int start = 0;
+        int mid = 0;
+        int end = arr.length-1;
+        while(mid <= end){
+            if(a[mid] == 0){
+                int temp = a[mid];
+                a[mid] = a[start];
+                a[start] = temp;
+                start++;
+                mid++;
+            } else if(a[mid] == 1){
+                mid++;
+            } else{
+                int temp = a[mid];
+                a[mid] = a[end];
+                a[end] = temp;
+                end--;  
+            }
+        }
+    }
+}
