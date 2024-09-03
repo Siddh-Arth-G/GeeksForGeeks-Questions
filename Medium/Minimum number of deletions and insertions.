@@ -1,0 +1,26 @@
+class Solution
+{
+    static int longestCommonSubsequence(String str1, String str2){
+        int[][] res = new int[str1.length()+1][str2.length()+1];
+        
+        for(int i=1; i<=str1.length(); i++){
+            for(int j=1; j<=str2.length(); j++){
+                if(str1.charAt(i-1) == str2.charAt(j-1)){
+                    res[i][j] = res[i-1][j-1] + 1;
+                }else{
+                    res[i][j] = Math.max(res[i][j-1], res[i-1][j]);
+                }
+            }
+        }
+        return res[str1.length()][str2.length()];
+    }
+	public int minOperations(String str1, String str2) 
+	{ 
+	    // Your code goes here
+	    int lcs = longestCommonSubsequence(str1, str2);
+	    int deletion = str1.length() - lcs;
+	    int insertion = str2.length() - lcs;
+	    
+	    return deletion+insertion;
+	} 
+}
