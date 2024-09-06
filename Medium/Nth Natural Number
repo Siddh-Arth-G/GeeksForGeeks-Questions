@@ -1,0 +1,13 @@
+class Solution {
+    long findNth(long n) {
+        // code here
+        long result = 0;
+        long current = 1;
+        while(n > 0){
+            result = result + current*(n%9);
+            current *= 10;
+            n /= 9;
+        }
+        return result;
+    }
+}
