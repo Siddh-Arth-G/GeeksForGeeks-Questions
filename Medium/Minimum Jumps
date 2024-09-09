@@ -1,0 +1,28 @@
+class Solution {
+    static int minJumps(int[] arr) {
+        // your code here
+        int jumps = 0;
+        int dest = arr.length-1;
+        int coverage = 0;
+        int lastJumps = 0;
+        
+        if(arr.length == 1){
+            return 0;
+        }
+        
+        for(int i=0; i<arr.length; i++){
+            coverage = Math.max(coverage, i+arr[i]);
+            
+            if(i == lastJumps){
+                lastJumps = coverage;
+                jumps++;
+            
+            
+                if(coverage >= dest){
+                    return jumps;
+                }
+            }
+        }
+        return -1;
+    }
+}
