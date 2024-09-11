@@ -1,0 +1,19 @@
+class Solution {
+    int getMiddle(Node head) {
+        // Your code here.
+        int count = 0;
+        Node temp = head;
+        if(head == null){
+            return 0;
+        }
+        while(head != null){
+            head = head.next;
+            count++;
+        }
+        int middle = count/2;
+        for(int i=0; i<middle; i++){
+            temp = temp.next;
+        }
+        return temp.data;
+    }
+}
