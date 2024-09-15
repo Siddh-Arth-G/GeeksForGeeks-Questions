@@ -1,0 +1,27 @@
+class Solution
+{
+    Node head = null;
+    Node lastNode = null;
+    void helper(Node root){
+        if(root == null){
+            return;
+        }
+        helper(root.left);
+        if(head == null){
+            head = root;
+        }
+        if(lastNode != null){
+            lastNode.right = root;
+        }
+        root.left = lastNode;
+        lastNode = root;
+        helper(root.right);
+    }
+    //Function to convert binary tree to doubly linked list and return it.
+    Node bToDLL(Node root)
+    {
+	//  Your code here
+	    helper(root);
+	    return head;
+    }
+}
