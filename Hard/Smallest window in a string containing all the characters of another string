@@ -1,0 +1,50 @@
+class Solution
+{
+    //Function to find the smallest window in the string s consisting
+    //of all the characters of string p.
+    public static String smallestWindow(String s, String p)
+    {
+        // Your code here
+        if(p.length() > s.length()){
+            return "-1";
+        }
+        int[] charP = new int[26];
+        int[] charS = new int[26];
+        int c1 = 0;
+        int c2 = 0;
+        int lenP = p.length();
+        int lenS = s.length();
+        int j = 0;
+        int start = -1;
+        int end = -1;
+        int len = Integer.MAX_VALUE;
+        for(int i=0; i<lenP; i++){
+            char ch = p.charAt(i);
+            charP[ch-'a']++;
+            if(charP[ch-'a'] == 1){
+                c1++;
+            }
+        }
+        for(int i=0; i<lenS; i++){
+            char ch = s.charAt(i);
+            charS[ch-'a']++;
+            if(charS[ch-'a'] == charP[ch-'a']){
+                c2++;
+            }
+            if(c2 == c1){
+                while(charS[s.charAt(j)-'a'] > charP[s.charAt(j)-'a']){
+                    charS[s.charAt(j++)-'a']--;
+                }
+                if(len > i - j + 1){
+                    start = j;
+                    end = i;
+                    len = i - j + 1;
+                }
+            }
+        }
+        if(start == -1){
+            return "-1";
+        }
+        return s.substring(start, end+1); 
+    }
+}
