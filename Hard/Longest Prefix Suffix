@@ -1,3 +1,9 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/longest-prefix-suffix2527/0
+
+//////////Solution
+
 class Solution {
     int lps(String str) {
         // code here
