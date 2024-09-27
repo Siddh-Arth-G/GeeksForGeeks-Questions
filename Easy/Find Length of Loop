@@ -1,5 +1,8 @@
+///////////////////////////////////Question link
+
 https://www.geeksforgeeks.org/problems/find-length-of-loop/0
 
+///////////////////////////////////Solution
 class Solution {
     // Function to find the length of a loop in the linked list.
     public int countNodesinLoop(Node head) {
