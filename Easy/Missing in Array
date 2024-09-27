@@ -1,3 +1,9 @@
+//////////////Question Link
+
+https://www.geeksforgeeks.org/problems/missing-number-in-array1416/0
+
+/////////////Solution
+
 class Solution {
 
     // Note that the size of the array is n-1
