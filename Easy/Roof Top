@@ -1,3 +1,9 @@
+///////////Question Link
+
+https://www.geeksforgeeks.org/problems/roof-top-1587115621/0
+
+/////////Solution
+
 class Solution {
     // Function to find maximum number of consecutive steps
     // to gain an increase in altitude with each step.
