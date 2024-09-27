@@ -1,3 +1,9 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/maximum-of-all-subarrays-of-size-k3101/0
+
+//////////Solution
+
 class Solution {
     // Function to find maximum of each subarray of size k.
     public ArrayList<Integer> max_of_subarrays(int k, int arr[]) {
