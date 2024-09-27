@@ -1,3 +1,9 @@
+//////////////////Question Link
+
+https://www.geeksforgeeks.org/problems/minimum-cost-of-ropes-1587115620/0
+
+/////////////////Solution
+
 class Solution {
     // Function to return the minimum cost of connecting the ropes.
     public long minCost(long[] arr) {
