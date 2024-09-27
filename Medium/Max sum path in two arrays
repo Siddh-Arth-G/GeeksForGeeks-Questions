@@ -1,3 +1,9 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/max-sum-path-in-two-arrays/0
+
+//////////Solution
+
 class Solution {
     public int maxPathSum(List<Integer> arr1, List<Integer> arr2) {
         // code here
