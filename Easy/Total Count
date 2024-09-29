@@ -1,0 +1,20 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/total-count2415/1
+
+//////////Solution
+
+class Solution {
+    int totalCount(int k, int[] arr) {
+        // code here
+        int count = 0;
+        for(int num : arr){
+            if(num%k == 0){
+                count = count + num/k;
+            }else{
+                count = count + num/k + 1;
+            }
+        }
+        return count;
+    }
+}
