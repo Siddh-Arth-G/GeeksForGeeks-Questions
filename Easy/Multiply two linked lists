@@ -1,0 +1,23 @@
+///////////Question Link
+
+https://www.geeksforgeeks.org/problems/multiply-two-linked-lists/1
+
+//////////Solution
+
+class Solution {
+    public long multiplyTwoLists(Node first, Node second) {
+        // Code here
+        long val1 = multiply(first);
+        long val2 = multiply(second);
+        long output = (val1*val2)%1000000007;
+        return output;
+    }
+    public static long multiply(Node node){
+        long val = 0;
+        while(node != null){
+            val = (val*10)%1000000007 + node.data;
+            node = node.next;
+        }
+        return val;
+    }
+}
