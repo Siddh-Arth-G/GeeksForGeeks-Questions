@@ -1,3 +1,9 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/minimum-number-of-jumps-1587115620/0
+
+//////////Solution
+
 class Solution {
     static int minJumps(int[] arr) {
         // your code here
