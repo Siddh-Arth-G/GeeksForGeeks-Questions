@@ -1,0 +1,24 @@
+///////////Question Link
+
+https://www.geeksforgeeks.org/problems/rotate-and-delete-1587115621/1
+
+//////////Solution
+
+class Solution {
+    public static int rotateDelete(ArrayList<Integer> arr) {
+        // code here
+        int size = arr.size();
+        int k = 1;
+        while(size > 1){
+            Collections.rotate(arr, 1);
+            int index = size - k;
+            if(index < 0){
+                index = 0;
+            }
+            arr.remove(index);
+            ++k;
+            --size;
+        }
+        return arr.get(0);
+    }
+}
