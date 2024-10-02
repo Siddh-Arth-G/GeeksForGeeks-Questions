@@ -1,3 +1,9 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/sorted-subsequence-of-size-3/0
+
+//////////Solution
+
 class Solution {
     // Function to find three numbers such that arr[smaller[i]] < arr[i] <
     // arr[greater[i]]
