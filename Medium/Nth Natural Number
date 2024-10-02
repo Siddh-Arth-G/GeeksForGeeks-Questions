@@ -1,3 +1,9 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/nth-natural-number/0
+
+//////////Solution
+
 class Solution {
     long findNth(long n) {
         // code here
