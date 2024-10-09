@@ -1,0 +1,31 @@
+///////////Question link
+
+https://www.geeksforgeeks.org/problems/linked-list-matrix/1
+
+//////////Solution
+
+class Solution {
+    static Node construct(int arr[][]) {
+        // Add your code here.
+        Node head = new Node(arr[0][0]);
+        Node ans = head;
+        for(int i=0; i<arr.length; i++){
+            Node temp = head;
+            for(int j=0; j<arr[0].length; j++){
+                if(j+1 < arr.length){
+                    head.right = new Node(arr[i][j+1]);
+                }
+                if(i+1 < arr.length){
+                    head.down = new Node(arr[i+1][j]);
+                }
+                if(head.right != null){
+                    head = head.right;
+                }
+            }
+            if(temp.down != null){
+                head = temp.down;
+            }
+        }
+        return ans;
+    }
+}
