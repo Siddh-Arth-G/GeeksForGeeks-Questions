@@ -1,0 +1,22 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/max-distance-between-same-elements/1
+
+//////////Solution
+
+class Solution {
+    public int maxDistance(int[] arr) {
+        // Code here
+        Map<Integer, Integer> map = new HashMap<>();
+        int max = 0;
+        for(int i=0; i<arr.length; i++){
+            if(map.containsKey(arr[i])){
+                int val = i-map.get(arr[i]);
+                max = Math.max(max, val);
+            }else{
+                map.put(arr[i], i);
+            }
+        }
+        return max;
+    }
+}
