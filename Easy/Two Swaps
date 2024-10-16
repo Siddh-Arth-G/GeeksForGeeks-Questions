@@ -1,0 +1,28 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/two-swaps--155623/1
+
+//////////Solution
+
+
+class Solution {
+
+    public boolean checkSorted(List<Integer> arr) {
+        // code here
+        int n = arr.size();
+        int swaps = 0;
+        for(int i=0; i<n; i++){
+            if(arr.get(i) == i+1){
+                continue;
+            }
+            
+            while(arr.get(i) != i+1){
+                int temp = arr.get(arr.get(i)-1);
+                arr.set(arr.get(i)-1, arr.get(i));
+                arr.set(i, temp);
+                ++swaps;
+            }
+        }
+        return swaps == 2 || swaps == 0;
+    }
+}
