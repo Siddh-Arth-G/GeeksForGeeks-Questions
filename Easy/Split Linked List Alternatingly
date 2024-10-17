@@ -1,0 +1,47 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/split-singly-linked-list-alternatingly/1
+
+//////////Solution
+
+class Solution {
+    // Function to append a new node with newData at the end of a linked list
+    Node[] alternatingSplitList(Node head) {
+        // code here
+        Node[] result = new Node[2];
+        if(head == null){
+            result[0] = null;
+            result[1] = null;
+            return result;
+        }
+        
+        if(head.next == null){
+            result[0] = null;
+            result[1] = null;
+            return result;
+        }
+        
+        
+        
+        Node odd = head;
+        Node even = head.next;
+        result[0] = odd;
+        result[1] = even;
+        
+        while(odd != null && even != null && even.next != null){
+            odd.next = even.next;
+            odd = odd.next;
+            
+            even.next = odd.next;
+            even = even.next;
+        }
+        if(odd != null){
+            odd.next = null;
+        }
+        if(even != null){
+            even.next = null;
+        }
+        
+        return result;
+    }
+}
