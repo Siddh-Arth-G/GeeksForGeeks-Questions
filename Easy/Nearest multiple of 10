@@ -1,0 +1,36 @@
+//////////Quesyion Link
+
+https://www.geeksforgeeks.org/problems/nearest-multiple-of-102437/1
+
+//////////Solution
+
+import java.math.BigInteger;
+
+class Solution {
+
+    String roundToNearest(String str) {
+        // Complete the function
+        int zeroes = 0;
+        while(zeroes < str.length() && str.charAt(zeroes) == '0'){
+            zeroes++;
+        }
+        BigInteger num = new BigInteger(str);
+        BigInteger rem = num.mod(BigInteger.TEN);
+        if(rem.compareTo(BigInteger.valueOf(5)) <= 0){
+            num = num.subtract(rem);
+        }else{
+            num = num.add(BigInteger.TEN.subtract(rem));
+        }
+        
+        String result = num.toString();
+        if(zeroes > 0){
+            StringBuilder sb = new StringBuilder();
+            for(int i=0; i<zeroes; i++){
+                sb.append('0');
+            }
+            sb.append(result);
+            result = sb.toString();
+        }
+        return result;
+    }
+}
