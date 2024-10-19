@@ -34,3 +34,35 @@ class Solution {
         return result;
     }
 }
+
+
+
+//////////2nd approach
+
+import java.math.BigInteger;
+
+class Solution {
+
+    String roundToNearest(String str) {
+        // Trim leading zeros to work with the main number
+        String trimmedStr = str.replaceFirst("^0+", "");
+        
+        // If the number is all zeros, return it directly
+        if (trimmedStr.isEmpty()) {
+            return str;
+        }
+
+        BigInteger num = new BigInteger(trimmedStr);
+        BigInteger rem = num.mod(BigInteger.TEN);
+
+        // Round the number based on the remainder
+        if (rem.compareTo(BigInteger.valueOf(5)) > 0) {
+            num = num.add(BigInteger.TEN.subtract(rem));
+        } else {
+            num = num.subtract(rem);
+        }
+
+        // Return the result, adding back any leading zeros from the original string
+        return str.substring(0, str.length() - trimmedStr.length()) + num.toString();
+    }
+}
