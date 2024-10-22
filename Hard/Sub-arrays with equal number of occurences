@@ -1,0 +1,28 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/sub-arrays-with-equal-number-of-occurences3901/1
+
+//////////Solution
+
+class Solution {
+
+    static int sameOccurrence(int arr[], int x, int y) {
+        // write code here
+        Map<Integer, Integer> map = new HashMap<>();
+        int count = 0,
+            ans = 0;
+        map.put(0, 1);
+        for(int i: arr){
+            if(i == x){
+                count++;
+            }else if(i == y){
+                count--;
+            }
+            if(map.containsKey(count)){
+                ans += map.get(count);
+            }
+            map.put(count, map.getOrDefault(count, 0)+1);
+        }
+        return ans;
+    }
+}
