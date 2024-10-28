@@ -1,0 +1,16 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/remove-duplicates-in-small-prime-array/1
+
+//////////Solution
+
+class Solution {
+    ArrayList<Integer> removeDuplicate(int arr[]) {
+        // code here
+        LinkedHashSet<Integer> set = new LinkedHashSet<>();
+        for(int num: arr){
+            set.add(num);
+        }
+        return new ArrayList<>(set);
+    }
+}
