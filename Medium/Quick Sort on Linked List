@@ -1,0 +1,62 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/quick-sort-on-linked-list/1
+
+//////////Solution
+
+/*node class of the linked list
+class Node
+{
+    int data;
+    Node next;
+    Node(int key)
+    {
+        data = key;
+        next = null;
+    }
+
+}*/
+// you have to complete this function
+class GfG {
+    static Node findTail(Node head){
+        Node temp = head;
+        while(temp.next != null){
+            temp = temp.next;
+        }
+        return temp;
+    }
+    public static Node quickSort(Node node) {
+        // Your code here
+        Node tail = findTail(node);
+        quickSortUtil(node, tail);
+        return node;
+    }
+    static void quickSortUtil(Node head, Node tail){
+        if(head == null || head == tail){
+            return;
+        }
+        Node pivot = partition(head, tail);
+        quickSortUtil(head, pivot);
+        if(pivot != null && pivot.next != null){
+            quickSortUtil(pivot.next, tail);
+        }
+    }
+    static Node partition(Node head, Node tail){
+        Node prev = head;
+        Node curr = head;
+        Node pivot = head;
+        while(curr != tail.next){
+            if(curr.data < pivot.data){
+                prev = prev.next;
+                int temp = prev.data;
+                prev.data = curr.data;
+                curr.data = temp;
+            }
+            curr = curr.next;
+        }
+        int temp = prev.data;
+        prev.data = pivot.data;
+        pivot.data = temp;
+        return prev;
+    }
+}
