@@ -1,0 +1,23 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/pairs-with-difference-k1713/1
+
+//////////Solution
+
+class Solution {
+    int countPairsWithDiffK(int[] arr, int k) {
+        // code here
+        int count = 0;
+        Map<Integer, Integer> map = new HashMap<>();
+        for(int ele: arr){
+            map.put(ele, map.getOrDefault(ele, 0)+1);
+        }
+        for(int num: arr){
+            int n2 = num - k;
+            if(map.containsKey(n2)){
+                count += map.get(n2);
+            }
+        }
+        return count;
+    }
+}
