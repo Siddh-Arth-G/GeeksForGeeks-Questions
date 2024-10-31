@@ -1,0 +1,42 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/insert-in-sorted-way-in-a-sorted-dll/1
+
+//////////Solution
+
+/*class of the node of the DLL is as
+/*
+class Node {
+    int data;
+    Node prev, next;
+    Node(int data) {
+        this.data = data;
+        this.prev = this.next = null;
+    }
+}
+*/
+class Solution {
+    public Node sortedInsert(Node head, int x) {
+        // add your code here
+        Node val = new Node(x);
+        if(head.data > val.data){
+            val.next = head;
+            head.prev = val;
+            return val;
+        }
+        Node temp = head;
+        while(temp.next != null && temp.next.data < val.data){
+            temp = temp.next;
+        }
+        if(temp.next == null){
+            temp.next = val;
+            val.prev = temp;
+        }else{
+            val.next = temp.next;
+            val.prev = temp;
+            temp.next.prev = val;
+            temp.next = val;
+        }
+        return head;
+    }
+}
