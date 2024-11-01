@@ -1,0 +1,26 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/swap-and-maximize5859/1
+
+//////////Solution
+
+// User function Template for Java
+
+class Solution {
+    public long maxSum(Long[] arr) {
+        // code here
+        Arrays.sort(arr);
+        int i = 0; 
+        int j = arr.length - 1;
+        long sum = 0;
+        while(i < j){
+            sum += Math.abs(arr[i] - arr[j]);
+            i++;
+            if(i == j) break;
+            sum += Math.abs(arr[i] - arr[j]);
+            j--;
+        }
+        sum += Math.abs(arr[j] - arr[0]);
+        return sum;
+    }
+}
