@@ -1,0 +1,21 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/second-largest3735/1
+
+//////////Solution
+
+class Solution {
+    public int getSecondLargest(int[] arr) {
+        // Code Here
+        if(arr.length < 2){
+            return -1;
+        }
+        Arrays.sort(arr);
+        for(int i=arr.length-2; i>=0; i--){
+            if(arr[arr.length-1] > arr[i]){
+                return arr[i];
+            }
+        }
+        return -1;
+    }
+}  
