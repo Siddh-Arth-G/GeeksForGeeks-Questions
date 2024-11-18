@@ -1,0 +1,30 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/rotate-array-by-n-elements-1587115621/1
+
+/////////Solution
+
+// User function Template for Java
+
+class Solution {
+    // Function to rotate an array by d elements in counter-clockwise direction.
+    static void rotateArr(int arr[], int d) {
+        // add your code here
+        int len=arr.length;
+        int target=d%len;
+        int ans[]=new int[target];
+        for(int i=0;i<target;i++)
+        {
+            ans[i]=arr[i];
+        }
+        int k=0;
+        for(int i=target;i<len;i++)
+        {
+            arr[k++]=arr[i];
+        }
+        for(int i=0;i<target;i++)
+        {
+            arr[k++]=ans[i];
+        }
+    }
+}
