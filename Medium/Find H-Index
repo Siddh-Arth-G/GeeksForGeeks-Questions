@@ -1,0 +1,21 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/find-h-index--165609/1
+
+//////////Solution
+
+// User function Template for Java
+class Solution {
+    // Function to find hIndex
+    public int hIndex(int[] citations) {
+        // code here
+        Arrays.sort(citations);
+        int citation = 0;
+        int n = citations.length;
+        for(int i=n-1 ; i>=0 ; i--){
+            int a = Math.min(citations[i] , n-i);
+            citation = Math.max(citation , a);
+        }
+        return citation;
+    }
+}
