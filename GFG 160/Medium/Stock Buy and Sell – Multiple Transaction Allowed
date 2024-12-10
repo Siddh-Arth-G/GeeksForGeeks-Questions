@@ -1,0 +1,27 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/arrays-gfg-160/problem/stock-buy-and-sell2615
+
+//////////Solution
+
+// User function Template for Java
+class Solution {
+    public int maximumProfit(int prices[]) {
+        // code here
+        int max=0;
+        int i=0,j=1;
+        int sum=0;
+        while(j<prices.length){
+            int value=prices[j]-prices[i];
+            if(max>value){
+                i=j;
+                sum+=max;
+                max=0;
+            }else{
+                max=value;
+            }
+            j++;
+        }
+        return sum+max;
+    }
+}
