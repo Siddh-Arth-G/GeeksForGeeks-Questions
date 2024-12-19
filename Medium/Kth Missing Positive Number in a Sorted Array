@@ -1,0 +1,23 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/kth-missing-positive-number-in-a-sorted-array/1
+
+//////////Solution
+
+class Solution {
+    public int kthMissing(int[] arr, int k) {
+        // code here
+        int l = 0;
+        int h = arr.length;
+        while(l<h){
+            int m = l+(h-l)/2;
+            if(arr[m]-m-1<k){
+                l = m + 1;
+            }
+            else{
+                h = m;
+            }
+        }
+        return l + k;
+    }
+}
