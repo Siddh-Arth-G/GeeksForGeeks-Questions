@@ -1,0 +1,24 @@
+///////////Question Link
+
+https://www.geeksforgeeks.org/problems/count-pairs-whose-sum-is-less-than-target/1
+
+//////////Solution
+
+class Solution {
+    int countPairs(int arr[], int target) {
+        Arrays.sort(arr);
+        int start=0,end=arr.length-1;
+        int count=0;
+        
+        while(start<end){
+            int sum=arr[start]+arr[end];
+            if(sum<target){
+                count+=(end-start);
+                start++;
+            }else{
+                end--;
+            }
+        }
+        return count;
+    }
+}
