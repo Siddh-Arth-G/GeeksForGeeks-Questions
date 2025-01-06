@@ -1,0 +1,38 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/pair-in-array-whose-sum-is-closest-to-x1124/1
+
+//////////Solution
+
+class Solution {
+    public List<Integer> sumClosest(int[] arr, int target) {
+        // code here
+       
+        Arrays.sort(arr);
+
+        int n = arr.length;
+        int closestDiff = Integer.MAX_VALUE;
+        List<Integer> result = new ArrayList<>();
+
+        // Use two pointers to find the pair
+        int left = 0, right = n - 1;
+
+        while (left < right) {
+            int sum = arr[left] + arr[right];
+            int diff = Math.abs(sum - target);
+
+            if (diff < closestDiff || (diff == closestDiff && (arr[right] - arr[left]) > (result.isEmpty() ? 0 : result.get(1) - result.get(0)))) {
+                closestDiff = diff;
+                result = Arrays.asList(arr[left], arr[right]);
+            }
+
+            if (sum < target) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+
+        return result;
+    }
+}
