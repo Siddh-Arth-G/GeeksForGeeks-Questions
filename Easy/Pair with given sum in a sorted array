@@ -1,0 +1,30 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/pair-with-given-sum-in-a-sorted-array4940/1
+
+//////////Solution
+
+class Solution {
+
+    int countPairs(int arr[], int target) {
+        // Complete the function
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int count = 0;
+
+        // Traverse the array
+        for (int num : arr) {
+            // Calculate the complement
+            int complement = target - num;
+
+            // Check if the complement exists in the map
+            if (map.containsKey(complement)) {
+                count += map.get(complement); // Increment count by the frequency of the complement
+            }
+
+            // Update the frequency of the current element in the map
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+
+        return count;
+    }
+}
