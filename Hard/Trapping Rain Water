@@ -1,0 +1,34 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/trapping-rain-water-1587115621/1
+
+//////////Solution
+
+class Solution {
+    public int maxWater(int arr[]) {
+        // code here
+        int n = arr.length;
+        int left[] = new int[n];
+        int max = 0;
+        for(int i =0;i<n;i++){
+            left[i] = max;
+            max= Math.max(arr[i],max);
+        }
+        int right[] = new int[n];
+        max = 0;
+        for(int i = n-1;i>=0;i--){
+            right[i] = max;
+            max = Math.max(arr[i],max);
+        }
+        int dp[] = new int[n];
+        for(int i =0;i<n;i++){
+            int cur = Math.min(left[i],right[i])-arr[i];
+            if(cur>=0){
+                dp[i] = cur;
+            }
+        }
+        int ans = 0;
+        for(int x : dp)ans += x;
+        return ans;
+    }
+}
