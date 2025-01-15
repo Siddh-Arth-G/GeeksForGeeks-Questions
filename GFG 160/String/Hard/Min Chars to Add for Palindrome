@@ -1,0 +1,43 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/string-gfg-160/problem/minimum-characters-to-be-added-at-front-to-make-string-palindrome
+
+//////////Solution
+
+// User function Template for Java
+
+class Solution {
+    public static int minChar(String s) {
+        // Write your code here
+        String rev = new StringBuilder(s).reverse().toString();
+        String pat = s + "$" + rev;
+        int[] lps = new int[pat.length()];
+        computeLPS(pat,lps);
+        
+        return s.length() - lps[lps.length - 1];
+        
+    }
+    
+    public static void computeLPS(String pat, int[] lps){
+        int len = 0;
+        int i = 1;
+        lps[0] = 0;
+        while(i < pat.length()){
+            if(pat.charAt(i) == pat.charAt(len)){
+                len++;
+                lps[i] = len;
+                i++;
+            }
+            else{
+                if(len != 0){
+                    len = lps[len - 1];
+                }
+                else{
+                    lps[i] = 0;
+                    i++;
+                }
+            }
+        }
+    }
+    
+}
