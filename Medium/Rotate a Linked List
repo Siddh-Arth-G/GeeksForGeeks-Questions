@@ -1,0 +1,48 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/rotate-a-linked-list/1
+
+//////////Solution
+
+class Node{
+    int data;
+    Node next;
+    Node(int d){
+        data=d;
+        next=null;
+    }
+}
+
+*/
+
+class Solution {
+    public Node rotate(Node head, int k) {
+        // add code here
+        
+        int n=0;
+        Node temp=head;
+        while(temp!=null){
+            temp=temp.next;
+            n++;
+        }
+        k=k%n;
+        if(k==0){
+            return head;
+        }
+        int i=0;
+        temp=head;
+        Node prev=null;
+        while(temp.next!=null){
+            if(i<k){
+                prev=temp;
+            }
+            temp=temp.next;
+          i++;
+        }
+        temp.next=head;
+        head=prev.next;
+        prev.next=null;
+
+        return head;
+    }
+}
