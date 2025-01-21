@@ -1,0 +1,69 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/product-array-puzzle4525/1
+
+//////////Solution
+
+class Solution {
+    // Function to reverse a linked list
+    private static Node reverseLinkedList(Node head) {
+        Node prev = null;
+        Node curr = head;
+        
+        while (curr != null) {
+            Node nextNode = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextNode;
+        }
+        
+        return prev;
+    }
+
+    // Reverse every k nodes in a linked list
+    public static Node reverseKGroup(Node head, int k) {
+        if (head == null || k <= 1) return head;
+
+        Node temp = head;
+        Node prevLast = null;
+        Node newHead = null;
+
+        while (temp != null) {
+            Node kthNode = temp;
+            int count = 1;
+
+            // Find the k-th node
+            while (count < k && kthNode.next != null) {
+                kthNode = kthNode.next;
+                count++;
+            }
+
+            // If there are not enough nodes left for a full k-group, reverse the remaining nodes
+            if (count < k) {
+                break;
+            }
+
+            Node nextGroupHead = kthNode.next;
+            kthNode.next = null;
+
+            // Reverse the current group
+            Node reversedHead = reverseLinkedList(temp);
+
+            if (newHead == null) {
+                newHead = reversedHead;
+            } else {
+                prevLast.next = reversedHead;
+            }
+
+            prevLast = temp;
+            temp = nextGroupHead;
+        }
+
+        // If there are remaining nodes, reverse them as well
+        if (temp != null) {
+            prevLast.next = reverseLinkedList(temp);
+        }
+
+        return newHead == null ? head : newHead;
+    }
+}
