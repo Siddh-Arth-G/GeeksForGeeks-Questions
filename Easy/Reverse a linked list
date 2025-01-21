@@ -1,0 +1,35 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/reverse-a-linked-list/1
+
+//////////Solution 
+
+// function Template for Java
+
+/* linked list node class:
+
+class Node {
+    int data;
+    Node next;
+    Node(int value) {
+        this.value = value;
+    }
+}
+
+*/
+
+class Solution {
+    Node reverseList(Node head) {
+        // code here
+        Node prev = null;
+        Node curr = head;
+        Node Next = null;
+         while(curr!=null){
+            Next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = Next;
+        }
+       return prev;
+    }
+}
