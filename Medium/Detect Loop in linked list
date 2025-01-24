@@ -1,0 +1,42 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/detect-loop-in-linked-list/1
+
+//////////Solution
+
+
+// User function template for JAVA
+
+/* Node is defined as
+
+class Node
+{
+    int data;
+    Node next;
+    Node(int d) {data = d; next = null; }
+}
+
+*/
+
+class Solution {
+    // Function to check if the linked list has a loop.
+    public static boolean detectLoop(Node head) {
+        if (head == null || head.next == null) {
+            return false;
+        }
+        
+        Node slow = head;
+        Node fast = head;
+        
+        while (fast != null && fast.next != null) {
+            slow = slow.next;      // Move slow pointer by 1 step
+            fast = fast.next.next; // Move fast pointer by 2 steps
+            
+            if (slow == fast) {
+                return true; // Loop detected
+            }
+        }
+        
+        return false; // No loop found
+    }
+}
