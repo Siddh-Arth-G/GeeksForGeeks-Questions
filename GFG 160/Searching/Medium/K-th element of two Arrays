@@ -1,0 +1,43 @@
+//////////Questio Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/searching-gfg-160/problem/k-th-element-of-two-sorted-array1317
+
+//////////Solution
+
+// User function Template for Java
+
+class Solution {
+    public int kthElement(int a[], int b[], int k) {
+        
+        int idx = 0;
+        int idx1 = 0;
+        int idx2 = 0;
+        
+        int arr[] = new int[a.length+b.length];
+        
+        while(idx1<a.length && idx2<b.length){
+            
+            
+             if(a[idx1]<=b[idx2]){
+               arr[idx++] = a[idx1++];
+             }
+                 else{
+                    arr[idx++] = b[idx2++];
+                    
+                 }
+             
+        }
+        
+        while(idx1<a.length){
+            arr[idx++] = a[idx1++];
+           
+        }
+        
+        while(idx2<b.length){
+            arr[idx++] = b[idx2++];
+        }
+        
+        return arr[k-1];
+        
+    }
+}
