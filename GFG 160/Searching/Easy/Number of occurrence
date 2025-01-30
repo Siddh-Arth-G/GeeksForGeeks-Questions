@@ -1,0 +1,18 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/searching-gfg-160/problem/number-of-occurrence2259
+
+//////////Solution
+
+class Solution {
+    int countFreq(int[] arr, int target) {
+        // code here
+        int count = 0;
+        for(int i=0; i<arr.length; i++){
+            if(target == arr[i]){
+                count++;
+            }
+        }
+        return count;
+    }
+}
