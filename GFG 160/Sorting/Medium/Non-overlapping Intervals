@@ -1,0 +1,41 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/sorting-gfg-160/problem/non-overlapping-intervals
+
+//////////Solution
+
+class data implements Comparable<data>{
+    int s;
+    int e;
+    data(int s,int e){
+        this.s=s;
+        this.e=e;
+    }
+    public int compareTo(data d){
+        return this.e-d.e;
+    }
+}
+
+
+class Solution {
+    static int minRemoval(int intervals[][]) {
+        // code here
+        data[] arr=new data[intervals.length];
+        for(int i=0;i<intervals.length;i++){
+            arr[i]=new data(intervals[i][0],intervals[i][1]);
+        }
+        Arrays.sort(arr);
+      
+        int count=0;
+      
+        int end=arr[0].e;
+        for(int i=1;i<arr.length;i++){
+            if(end>arr[i].s){
+                count++;
+            }else{
+                end=arr[i].e;
+            }
+        }
+        return count;
+    }
+}
