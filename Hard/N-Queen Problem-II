@@ -1,0 +1,48 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/n-queen-problem0315/1
+
+//////////Solution
+
+// User function Template for Java
+
+class Solution {
+    public void nqueenplace(int i,int n,ArrayList<Integer> board,boolean[] rows,
+    boolean[] diag1,boolean[] diag2,ArrayList<ArrayList<Integer>> res){
+        
+        if(i==n){
+            res.add(new ArrayList<>(board));
+            return;
+        }
+        
+        for(int j=0;j<n;j++){
+            if(!rows[j] && !diag1[i+j] && !diag2[j-i+n-1]){
+                rows[j] = diag1[i+j] = diag2[j-i+n-1] = true;
+                
+                board.add(j+1);
+                
+                nqueenplace(i+1,n,board,rows,diag1,diag2,res);
+                
+                board.remove(board.size()-1);
+                
+                rows[j] = diag1[i+j] = diag2[j-i+n-1] = false;
+                
+            }
+        }
+    }
+    public ArrayList<ArrayList<Integer>> nQueen(int n) {
+        // code here
+        
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        ArrayList<Integer> board = new ArrayList<>();
+        
+        boolean[] rows = new boolean[n];
+        
+        boolean[] diag1 = new boolean[2*n-1];
+        boolean[] diag2 = new boolean[2*n-1];
+        
+        nqueenplace(0,n,board,rows,diag1,diag2,res);
+        
+        return res;
+    }
+}
