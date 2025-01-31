@@ -1,0 +1,33 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/hashing-gfg-160/problem/find-all-triplets-with-zero-sum
+
+//////////Solution
+
+class Solution {
+    public List<List<Integer>> findTriplets(int[] arr) {
+        Set<ArrayList<Integer>> result = new HashSet<>();
+        HashMap<Integer,List<int[]>> hm = new HashMap<>();
+        
+        for(int i=0;i<arr.length;i++){
+            for(int j=i+1;j<arr.length;j++){
+                hm.computeIfAbsent(arr[i]+arr[j],k->new ArrayList<>()).add(new int[]{i,j});
+            }
+        }
+        
+        for(int i=0;i<arr.length;i++){
+            int rem = -arr[i];
+            if(hm.containsKey(rem)){
+                List<int [] > res = hm.get(rem);
+                for(int [] p : res){
+                    if(p[0] != i && p[1] != i){
+                        ArrayList<Integer> curr = new ArrayList<>(Arrays.asList(i,p[0],p[1]));
+                        Collections.sort(curr);
+                        result.add(curr);
+                    }
+                }
+            }
+        }
+            return new ArrayList<>(result);
+    }
+}
