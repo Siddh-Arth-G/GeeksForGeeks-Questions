@@ -1,0 +1,49 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/matrix-gfg-160/problem/spirally-traversing-a-matrix-1587115621
+
+//////////Solution
+
+
+class Solution {
+    // Function to return a list of integers denoting spiral traversal of matrix.
+    public ArrayList<Integer> spirallyTraverse(int mat[][]) {
+        // code here
+        int m = mat.length, n = mat[0].length;
+        ArrayList<Integer> arr = new ArrayList<>();
+        
+        int i = 0, k = 0, l = 0;
+        
+        while(k < m && l < n)   {
+            for(i = l; i < n; i++)  {
+                arr.add(mat[k][i]);
+            }
+            
+            k++;
+            
+            for(i = k; i < m; i++)  {
+                arr.add(mat[i][n - 1]);
+            }
+            
+            n--;
+            
+            if(k < m)   {
+                for(i = n - 1; i >= l; i--) {
+                    arr.add(mat[m - 1][i]);
+                }
+                
+                m--;
+            }
+            
+            if(l < n)   {
+                for(i =  m - 1; i >= k; i--)    {
+                    arr.add(mat[i][l]);
+                }
+                l++;
+            }
+        }
+        
+        return arr;
+        
+    }
+}
