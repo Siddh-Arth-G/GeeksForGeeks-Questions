@@ -1,0 +1,28 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/hashing-gfg-160/problem/longest-consecutive-subsequence2449
+
+//////////Solution
+
+class Solution {
+
+    // Function to return length of longest subsequence of consecutive integers.
+    public int longestConsecutive(int[] arr) {
+        // code here
+        int ans[]=new int[1000001];
+        for(int i=0;i<arr.length;i++){
+            ans[arr[i]]++;
+        }
+        int cnt=0;
+        int temp=0;
+        for(int i=0;i<ans.length;i++){
+            if(ans[i]!=0){
+                temp++;
+            }else{
+                temp=0;
+            }
+            cnt=Math.max(cnt,temp);
+        }
+        return cnt;
+    }
+}
