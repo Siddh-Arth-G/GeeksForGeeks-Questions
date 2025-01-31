@@ -1,0 +1,50 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/matrix-gfg-160/problem/search-in-a-matrix-1587115621
+
+//////////Solution
+
+class Solution {
+    static boolean search(int[]arr,int x)
+    {
+        int lo=0,hi=arr.length-1;
+        while(lo<=hi)
+        {
+            int mid=(lo+hi)/2;
+            if(x==arr[mid])
+            return true;
+            if(x<arr[mid])
+            hi=mid-1;
+            else
+            lo=mid+1;
+        }
+    
+        return false;
+    }
+    
+    public boolean searchMatrix(int[][] mat, int x) {
+        int n=mat.length,m=mat[0].length;
+        int lo=0,hi=n-1;
+        int row=-1;
+        while(lo<=hi)
+        {
+            int mid=(lo+hi)/2;
+            
+            if(x==mat[mid][0])
+            return true;
+            
+            if(x>mat[mid][0])
+            {
+               row=mid;
+               lo=mid+1;
+            }
+            
+            else
+            hi=mid-1;
+        }
+        if(row==-1)
+        return false;        
+        
+        return search(mat[row],x);
+    }
+}
