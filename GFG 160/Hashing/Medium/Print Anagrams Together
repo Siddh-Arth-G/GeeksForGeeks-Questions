@@ -1,0 +1,37 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/hashing-gfg-160/problem/print-anagrams-together
+
+//////////Solution
+
+class Solution {
+    public ArrayList<ArrayList<String>> anagrams(String[] a) {
+        // code here
+        Map<String,ArrayList<String>>m=new HashMap<>();
+        int n=a.length;
+        for(int i=0;i<n;i++){
+            String s=a[i];
+            String t=f(s);
+            if(m.containsKey(t)){
+                ArrayList<String>q=m.get(t);
+                q.add(s);
+                m.put(t,q);
+            }else{
+                ArrayList<String>q=new ArrayList<>();
+                q.add(s);
+                m.put(t,q);
+            }
+           // m.put(s,new ArrayList)
+        }
+        ArrayList<ArrayList<String>>ans=new ArrayList<>();
+        for(ArrayList<String>w:m.values())
+        ans.add(w);
+        return ans;
+        
+    }
+    private String f(String s){
+        char[]ch=s.toCharArray();
+        Arrays.sort(ch);
+        return new String(ch);
+    }
+}
