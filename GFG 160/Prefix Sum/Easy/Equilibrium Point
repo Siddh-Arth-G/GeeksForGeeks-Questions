@@ -1,0 +1,38 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/prefix-sum-gfg-160/problem/equilibrium-point-1587115620
+
+//////////Solution
+
+
+
+
+class Solution {
+    // Function to find equilibrium point in the array.
+    public static int findEquilibrium(int arr[]) {
+        int totalSum = 0;
+        int leftSum = 0;
+
+        // Calculate the total sum of the array
+        for (int num : arr) {
+            totalSum += num;
+        }
+
+        // Iterate through the array and check for equilibrium point
+        for (int i = 0; i < arr.length; i++) {
+            // Exclude the current element from the total sum
+            totalSum -= arr[i];
+
+            // Check if left sum equals the remaining total sum
+            if (leftSum == totalSum) {
+                return i; // Return the equilibrium index
+            }
+
+            // Add the current element to the left sum
+            leftSum += arr[i];
+        }
+
+        // If no equilibrium point is found, return -1
+        return -1;
+    }
+}
