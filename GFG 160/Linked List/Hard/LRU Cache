@@ -1,0 +1,34 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/linked-list-gfg-160/problem/lru-cache
+
+//////////Solution
+
+// design the class in the most optimal way
+
+class LRUCache {
+    // Constructor for initializing the cache capacity with the given value.
+    private final int c;
+    private static  LinkedHashMap<Integer,Integer> cache;
+    LRUCache(int cap) {
+        // code here
+        this.c=cap;
+        this.cache=new LinkedHashMap<>(c,0.75f,true){
+            protected boolean removeEldestEntry(Map.Entry<Integer,Integer> eldest){
+                return size()>c;
+            }
+        };
+    }
+
+    // Function to return value corresponding to the key.
+    public static int get(int key) {
+        // your code here
+        return cache.getOrDefault(key,-1);
+    }
+
+    // Function for storing key-value pair.
+    public static void put(int key, int value) {
+        // your code here
+        cache.put(key,value);
+    }
+}
