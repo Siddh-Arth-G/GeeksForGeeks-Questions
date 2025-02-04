@@ -1,0 +1,24 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/two-pointer-technique-gfg-160/problem/container-with-most-water0535
+
+//////////Solution
+
+class Solution {
+
+    public int maxWater(int arr[]) {
+         int i=0,j=arr.length-1;
+        int max=0;
+        while(i<j){
+           int min=Math.min(arr[i],arr[j]);
+           max=Math.max(max,(min * (j-i)));
+           if(arr[i]<arr[j]){
+               i++;
+           }else{
+               j--;
+           }
+          
+       }
+       return max;  // Code Here
+    }
+}
