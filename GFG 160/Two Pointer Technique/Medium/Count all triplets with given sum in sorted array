@@ -1,0 +1,34 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/two-pointer-technique-gfg-160/problem/count-all-triplets-with-given-sum-in-sorted-array
+
+//////////Solution
+
+
+class Solution {
+    public int countTriplets(int[] arr, int target) {
+        // Code Here
+        int n = arr.length;
+        int count = 0;
+        for(int i=0; i <= n - 3; i++){
+            int start = i+1, end = n-1;
+            while(start < end){
+                int sum = arr[i] + arr[start] + arr[end];
+                if(sum > target){
+                    end--;
+                }else if(sum < target){
+                    start++;
+                }else if(sum == target){
+                    count++;
+                    int temp = start + 1;
+                    while(temp < end && arr[temp] == arr[temp - 1]){
+                        count++;
+                        temp++;
+                    }
+                    end--;
+                }
+            }
+        }
+        return count;
+    }
+}
