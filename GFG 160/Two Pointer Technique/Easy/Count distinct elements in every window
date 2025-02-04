@@ -1,0 +1,32 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/two-pointer-technique-gfg-160/problem/count-distinct-elements-in-every-window
+
+//////////Solution
+
+class Solution {
+    ArrayList<Integer> countDistinct(int arr[], int k) {
+        HashMap<Integer, Integer> map = new HashMap<>(); 
+        ArrayList<Integer> ans = new ArrayList<>(); 
+        int windowStart = 0;
+
+        for (int windowEnd = 0; windowEnd < arr.length; windowEnd++) {
+            
+            map.put(arr[windowEnd], map.getOrDefault(arr[windowEnd], 0) + 1);
+
+            if (windowEnd - windowStart + 1 >= k) {
+
+                ans.add(map.size());
+
+                if (map.get(arr[windowStart]) == 1) {
+                    map.remove(arr[windowStart]); 
+                } else {
+                    map.put(arr[windowStart], map.get(arr[windowStart]) - 1); 
+                }
+                windowStart++;
+            }
+        }
+
+        return ans; 
+    }
+}
