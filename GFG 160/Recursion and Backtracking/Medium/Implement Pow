@@ -1,0 +1,22 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/recursion-and-backtracking-gfg-160/problem/powx-n
+
+//////////Solution
+
+// User function Template for Java
+class Solution {
+    double power(double b, int e) {
+        if (e == 0) {
+            return 1.0;
+        }
+    
+        double half = power(b, e / 2);  // Recursive call with e/2
+    
+        if (e % 2 == 0) {
+            return half * half;  // If e is even
+        } else {
+            return (e > 0) ? half * half * b : half * half / b;  // If e is odd
+        }
+    }
+}
