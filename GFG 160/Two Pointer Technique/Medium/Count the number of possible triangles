@@ -1,0 +1,29 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/two-pointer-technique-gfg-160/problem/count-possible-triangles-1587115620
+
+//////////Solution
+
+
+class Solution {
+    static int countTriangles(int arr[]) {
+         int n = arr.length;
+         int count = 0;
+        
+        Arrays.sort(arr);
+
+        for (int i = n - 1; i >= 2; i--) {
+            int left = 0, right = i - 1;
+            while (left < right) {
+                if (arr[left] + arr[right] > arr[i]) {
+                    count += right - left;
+                    right--;
+                } else {
+                    left++;
+                }
+            }
+        }
+
+        return count;
+    }
+}
