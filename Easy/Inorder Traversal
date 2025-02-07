@@ -1,0 +1,32 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/inorder-traversal/1
+
+//////////Solution
+
+/* A Binary Tree node
+
+class Node {
+    int data;
+    Node left, right;
+   Node(int item)    {
+        data = item;
+        left = right = null;
+    }
+}
+*/
+class Solution {
+    
+    void inorder(Node root,ArrayList<Integer> in){
+        if(root == null) return;
+        inorder(root.left,in);
+        in.add(root.data);
+        inorder(root.right,in);
+    }
+    ArrayList<Integer> inOrder(Node root) {
+        // CodeGenius
+        ArrayList<Integer> in =  new ArrayList<>();
+        inorder(root,in);
+        return in;
+    }
+}
