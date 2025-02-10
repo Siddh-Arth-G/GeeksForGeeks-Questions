@@ -1,0 +1,65 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/k-sum-paths/1
+
+//////////Solution
+
+/*
+class Node {
+    int data;
+    Node left;
+    Node right;
+
+    Node(int data) {
+        this.data = data;
+        left = null;
+        right = null;
+    }
+}
+*/
+
+class Solution {
+    public int sumK(Node root, int k) {
+        HashMap<Integer, Integer> prefixSumMap = new HashMap<>();
+        prefixSumMap.put(0, 1); // Base case: one way to get sum = 0
+        return dfs(root, 0, k, prefixSumMap);
+    }
+
+    private int dfs(Node node, int currentSum, int k, HashMap<Integer, Integer> prefixSumMap) {
+        if (node == null) return 0;
+
+        // Update current path sum
+        currentSum += node.data;
+
+        // Count paths that sum to k
+        int count = prefixSumMap.getOrDefault(currentSum - k, 0);
+
+        // Store currentSum in map
+        prefixSumMap.put(currentSum, prefixSumMap.getOrDefault(currentSum, 0) + 1);
+
+        // Recursive DFS for left and right subtrees
+        count += dfs(node.left, currentSum, k, prefixSumMap);
+        count += dfs(node.right, currentSum, k, prefixSumMap);
+
+        // Backtrack: Remove current sum from the map
+        prefixSumMap.put(currentSum, prefixSumMap.get(currentSum) - 1);
+
+        return count;
+    }
+
+    // Helper function to test the implementation
+    public static void main(String[] args) {
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        root.left.left = new Node(3);
+        root.left.right = new Node(1);
+        root.right.left = new Node(2);
+        root.right.right = new Node(4);
+        root.left.left.left = new Node(1);
+
+        Solution sol = new Solution();
+        int k = 7;
+        System.out.println("Number of downward paths with sum " + k + ": " + sol.sumK(root, k));
+    }
+}
