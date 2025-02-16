@@ -1,0 +1,44 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/find-k-th-smallest-element-in-bst/1
+
+//////////Solution
+
+
+
+
+// User function Template for Java
+
+// class Node
+// {
+//     int data;
+//     Node left, right;
+
+//     public Node(int d)
+//     {
+//         data = d;
+//         left = right = null;
+//     }
+// }
+
+class Solution {
+    // Return the Kth smallest element in the given BST
+    int e=-1;
+    void f(Node root, int[] k ){
+        if(root==null) return;
+        f(root.left,k);
+        k[0]--;
+        // System.out.println("k "+k+"root "+root.data);
+        if(k[0]==0){
+            e=root.data;
+        } 
+        f(root.right,k);
+    }
+    public int kthSmallest(Node root, int k) {
+        // Write your code here
+        int a[] = new int[1];
+        a[0]=k;
+        f(root,a);
+        return e;
+    }
+}
