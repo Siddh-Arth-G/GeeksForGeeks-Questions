@@ -1,0 +1,50 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/tree-gfg-160/problem/level-order-traversal
+
+//////////Solution
+
+// import java.util.*;
+/*
+class Node {
+    int data;
+    Node left, right;
+
+    Node(int item) {
+        data = item;
+        left = right = null;
+    }
+}
+*/
+class Solution {
+    public ArrayList<ArrayList<Integer>> levelOrder(Node root) {
+        // Your code here
+        ArrayList<ArrayList<Integer>>ans=new ArrayList<>();
+        Queue<Node>q=new LinkedList<>();
+        q.add(root);
+        while(true){
+            
+            int n=q.size();
+            if(n==0){
+                break;
+            }
+            ArrayList<Integer>temp=new ArrayList<>();
+            while(n-->0){
+                Node current=q.poll();
+                if(current.left!=null){
+                    q.add(current.left);
+                }
+                if(current.right!=null){
+                    q.add(current.right);
+                }
+                temp.add(current.data);
+                
+            }
+            ans.add(temp);
+            
+            
+        }
+        
+        return ans;
+    }
+}
