@@ -1,0 +1,50 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/tree-gfg-160/problem/maximum-path-sum-from-any-node
+
+//////////Solution
+
+/*
+Node defined as
+class Node{
+    int data;
+    Node left,right;
+    Node(int d){
+        data=d;
+        left=right=null;
+    }
+}
+*/
+
+class Solution {
+    class pair{
+        int path;
+        int sum;
+        
+        pair(int path,int sum){
+            this.path = path;
+            this.sum = sum;
+        }
+    }
+    
+    pair solve(Node root){
+        if(root == null) return new pair(Integer.MIN_VALUE,Integer.MIN_VALUE);
+        
+        pair left = solve(root.left);
+        pair right = solve(root.right);
+        
+        int cpath = root.data + Math.max(0,Math.max(left.path,right.path));
+        
+        int maxsum = Math.max(left.sum,right.sum);
+        int csum = root.data + Math.max(left.path,0) + Math.max(right.path,0);
+        
+        csum = Math.max(csum,maxsum);
+        
+        return new pair(cpath, csum);
+    }
+    
+    int findMaxSum(Node node) {
+        pair ans = solve(node);
+        return Math.max(ans.path,ans.sum);
+    }
+}
