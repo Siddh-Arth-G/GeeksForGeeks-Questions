@@ -1,0 +1,57 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/decode-the-string2444/1
+
+//////////Solution
+
+class Solution {
+    static String decodeString(String s) {
+        // code here
+        Stack<String> st = new Stack<>();
+        for(char c : s.toCharArray()) {
+            if(c != ']') {
+                st.push(c+"");
+            } else {
+                String str = getEncodedString(st);
+                int k = getK(st);
+                String curr = multiplyString(str , k);
+                st.push(curr);
+            }
+        }
+        StringBuilder ans = new StringBuilder();
+        while(!st.isEmpty()) {
+            ans.insert(0 , st.pop());
+        }
+        return ans.toString();
+    }
+    
+    private static int getK(Stack<String> st) {
+        int k = 0;
+        int mul = 1;
+        while(!st.isEmpty() && st.peek().length() == 1 && Character.isDigit(st.peek().charAt(0))) {
+            int digit = st.pop().charAt(0) - '0';
+            k += mul * digit;
+            mul *= 10;
+        }
+        return k;
+    }
+    
+    private static String getEncodedString(Stack<String> st) {
+        StringBuilder sb = new StringBuilder();
+        while(!st.isEmpty() && !st.peek().equals("[")) {
+            sb.insert(0 , st.pop());
+        }
+        if(!st.isEmpty()) {
+            st.pop();
+        }
+        return sb.toString();
+    }
+    
+    private static String multiplyString(String s, int k) {
+        StringBuilder sb = new StringBuilder();
+        while(k-- > 0) {
+            sb.append(s);
+        }
+        return sb.toString();
+    }
+}
