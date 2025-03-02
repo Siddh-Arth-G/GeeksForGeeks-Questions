@@ -1,0 +1,41 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/evaluation-of-postfix-expression1735/1
+
+//////////Solution
+
+class Solution {
+    public int evaluate(String[] arr) {
+        // code here
+        Stack<Integer> stack = new Stack<>();
+        
+        for(int i =0;i<arr.length;i++){
+            
+            if(!(arr[i].equals("*") || arr[i].equals("-")||arr[i].equals("+")|| arr[i].equals("/"))){
+                stack.push(Integer.parseInt(arr[i]));
+            }
+            else {
+                Integer top = stack.pop();
+                Integer sec = stack.pop();
+                if(arr[i].equals("*")){
+                    Integer val = top * sec;
+                    stack.push(val);
+                }
+                else if(arr[i].equals("-") ){
+                    Integer val = sec - top;
+                    stack.push(val);
+                }
+                else if(arr[i].equals("+")){
+                    Integer val = top + sec;
+                    stack.push(val);
+                }
+                else if(arr[i].equals("/")){
+                    Integer val = sec / top;
+                    stack.push(val);
+                }
+            }
+        }
+        
+     return stack.pop();
+    }
+}
