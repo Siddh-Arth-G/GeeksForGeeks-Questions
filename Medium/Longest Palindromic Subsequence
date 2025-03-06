@@ -1,0 +1,26 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/longest-palindromic-subsequence-1612327878/1
+
+//////////Solution
+
+class Solution {
+    int dp[][];
+    int rec(String s,int i,int j){
+        if(i == j) return 1;
+        if(i > j) return 0;
+        if(dp[i][j] != -1) return dp[i][j];
+        if(s.charAt(i) == s.charAt(j)){
+            return dp[i][j] = 2 + rec(s,i+1,j-1);
+        }else{
+            return dp[i][j] = Math.max(rec(s,i+1,j),rec(s,i,j-1));
+        }
+    }
+    public int longestPalinSubseq(String s) {
+        // code here
+        int n = s.length();
+        dp = new int[n][n];
+        for(int x[]:dp) Arrays.fill(x,-1);
+        return rec(s,0,n-1);
+    }
+}
