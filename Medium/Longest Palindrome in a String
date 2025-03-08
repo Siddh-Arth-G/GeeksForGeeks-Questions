@@ -1,0 +1,35 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/longest-palindrome-in-a-string3411/1
+
+//////////Solution
+
+class Solution {
+    static String longestPalindrome(String s) {
+        int n = s.length();
+        String rev = new StringBuilder(s).reverse().toString();
+        int[][] dp = new int[n+1][n+1];
+        int maxLength = 0;
+        int endIndex = 0; // End index of the longest palindromic substring in the original string
+        
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (s.charAt(i - 1) == rev.charAt(j - 1)) {
+                    dp[i][j] = 1 + dp[i - 1][j - 1];
+                    
+                    // Check if this common substring is a palindrome
+                    if (dp[i][j] > maxLength) {
+                        int startIndexInRev = n - j; // Start index in the original string
+                        if (startIndexInRev + dp[i][j] - 1 == i - 1) { // Ensure palindrome condition
+                            maxLength = dp[i][j];
+                            endIndex = i - 1;
+                        }
+                    }
+                }
+            }
+        }
+        
+        // Extract the longest palindromic substring
+        return s.substring(endIndex - maxLength + 1, endIndex + 1);
+    }
+}
