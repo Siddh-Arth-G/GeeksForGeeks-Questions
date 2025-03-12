@@ -1,0 +1,37 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/string-bonus-problems/problem/number-to-words0335
+
+//////////Solution
+
+// User function Template for Java
+class Solution {
+    String[] lessThan20Units = {"", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"};
+    String[] tenUnits = {"", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy","Eighty", "Ninety" };
+    String[] over100Units = {"Billion", "Million", "Thousand", "Hundred"};
+    int[] radix = {1_000_000_000, 1_000_000, 1000, 100};
+    String convertToWords(long n) {
+        // code here
+        if(n==0){
+            return "Zero";
+        }
+        return solve(n);
+    }
+    String solve(long n){
+        StringBuilder sb = new StringBuilder();
+        for(int i=0; i<radix.length; i++){
+            long count = n/radix[i];
+            if(count > 0){
+                sb.append(solve(count)+ " ");
+                sb.append(over100Units[i]+" ");
+                n %= radix[i];
+            }
+        }
+        if(n >= 20){
+            sb.append(tenUnits[(int)n/10]+" ");
+            n %= 10;
+        }
+        sb.append(lessThan20Units[(int)n]);
+        return sb.toString().trim();
+    }
+}
