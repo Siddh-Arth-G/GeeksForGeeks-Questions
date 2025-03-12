@@ -1,0 +1,36 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/stack-gfg-160/problem/next-larger-element-1587115620
+
+//////////Solution
+
+class Solution {
+    // Function to find the next greater element for each element of the array.
+    public ArrayList<Integer> nextLargerElement(int[] arr) {
+        int n = arr.length;
+        ArrayList<Integer> list = new ArrayList<>();
+        Stack<Integer> st = new Stack<>();
+        int[] result = new int[n];
+        
+        // Process from right to left
+        for (int i = n - 1; i >= 0; i--) {
+            // Remove elements that are not greater than the current element
+            while (!st.isEmpty() && st.peek() <= arr[i]) {
+                st.pop();
+            }
+            
+            // If the stack is empty, no greater element exists; otherwise, top is next greater
+            result[i] = st.isEmpty() ? -1 : st.peek();
+            
+            // Push current element onto the stack for future comparisons
+            st.push(arr[i]);
+        }
+        
+        // Convert the result array to ArrayList
+        for (int num : result) {
+            list.add(num);
+        }
+        
+        return list;
+    }
+}
