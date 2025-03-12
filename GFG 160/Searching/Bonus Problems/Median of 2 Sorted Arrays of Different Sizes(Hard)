@@ -1,0 +1,55 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/searching-bonus-problems/problem/median-of-2-sorted-arrays-of-different-sizes
+
+//////////Solution
+
+// User function Template for Java
+
+class Solution {
+    public double medianOf2(int a[], int b[]) {
+        // Calculate the total size of the merged array
+        int n = a.length;
+        int m = b.length;
+        
+        // Create a new array to hold the merged result
+        int[] merged = new int[n + m];
+        
+        // Merge the two arrays
+        int i = 0, j = 0, k = 0;
+        
+        // Merge arrays a[] and b[] into merged[]
+        while (i < n && j < m) {
+            if (a[i] <= b[j]) {
+                merged[k++] = a[i++];
+            } else {
+                merged[k++] = b[j++];
+            }
+        }
+        
+        // If there are remaining elements in a[], add them to merged[]
+        while (i < n) {
+            merged[k++] = a[i++];
+        }
+        
+        // If there are remaining elements in b[], add them to merged[]
+        while (j < m) {
+            merged[k++] = b[j++];
+        }
+        
+        // Now merged[] contains all elements of both arrays sorted
+        
+        // Find the median
+        int totalLength = n + m;
+        
+        if (totalLength % 2 == 1) {
+            // If the total length is odd, return the middle element
+            return merged[totalLength / 2];
+        } else {
+            // If the total length is even, return the average of the two middle elements
+            int mid1 = merged[totalLength / 2];
+            int mid2 = merged[totalLength / 2 - 1];
+            return (mid1 + mid2) / 2.0;
+        }
+    }
+}
