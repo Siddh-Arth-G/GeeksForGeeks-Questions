@@ -1,0 +1,46 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/searching-bonus-problems/problem/koko-eating-bananas
+
+//////////Solution
+
+class Solution {
+    public static int kokoEat(int[] arr, int k) {
+        // code here
+        int max = arr[0];
+        for(int i=1; i<arr.length; i++){
+            if(arr[i] > max){
+                max = arr[i];
+            }
+        }
+        
+        int start = 1;
+        int end = max;
+        int ans = -1;
+        while(start <= end){
+            int mid = (start + end)/2;
+            if(possibleSolution(mid, k, arr)){
+                ans = mid;
+                end = mid - 1;
+            }
+            else{
+                start = mid + 1;
+            }
+        }
+        return ans;
+    }
+    
+    static boolean possibleSolution(int num, int k, int[] arr){
+        int totalHours = 0;
+        for(int i=0; i<arr.length; i++){
+            totalHours += arr[i]/num;
+            if(arr[i]%num != 0){
+                totalHours++;
+            }
+        }
+        if(totalHours <= k){
+            return true;
+        }
+        return false;
+    }
+}
