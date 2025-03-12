@@ -1,0 +1,23 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/array-bonus-problems/problem/last-moment-before-all-ants-fall-out-of-a-plank
+
+//////////Solution
+
+// User function Template for Java
+class Solution {
+    public int getLastMoment(int n, int left[], int right[]) {
+        // code here
+        int res = 0;
+        
+        for(int val : left){
+            res = Math.max(res, val);
+        }
+        
+        for(int val : right){
+            res = Math.max(res, n - val);
+        }
+        
+        return res;
+    }
+}
