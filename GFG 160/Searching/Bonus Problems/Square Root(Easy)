@@ -1,0 +1,30 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/searching-bonus-problems/problem/square-root
+
+//////////Solution
+
+// Function to find square root
+// x: element to find square root
+class Solution {
+    int floorSqrt(int n) {
+        // Your code here
+        int ans=0;
+        int low=1;
+        int high=n;
+        while(low<=high){
+            int mid=low+(high-low)/2;
+            long com=mid*mid;
+            if(com==n){
+                return mid;
+            }
+            else if(com>n){
+                high=mid-1;
+            }else{
+                ans=mid;
+                low=mid+1;
+            }
+        }
+        return ans;
+    }
+}
