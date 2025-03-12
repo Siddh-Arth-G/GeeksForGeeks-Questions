@@ -1,0 +1,37 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/sorting-bonus-problems/problem/minimum-sum4058
+
+//////////Solution
+
+// User function Template for Java
+
+class Solution {
+    String minSum(int[] arr) {
+        // code here
+        Arrays.sort(arr);
+        StringBuilder sb = new StringBuilder();
+        int carry = 0;
+        int sum = 0;
+        for(int i=arr.length-1; i>=0; i=i-2){
+            if(i != 0){
+                sum = arr[i]+arr[i-1]+carry;
+                carry = sum/10;
+                sum %= 10;
+                sb.append(sum);
+            }else{
+                sum = arr[i]+carry;
+                carry = sum/10;
+                sum %= 10;
+                sb.append(sum);
+            }
+        }
+        sb.append(carry);
+        String str = sb.reverse().toString();
+        int i = 0;
+        while(str.charAt(i) == '0'){
+            i++;
+        }
+        return str.substring(i);
+    }
+}
