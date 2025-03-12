@@ -1,0 +1,27 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/array-bonus-problems/problem/maximize-number-of-1s0905
+
+//////////Solution
+
+// User function Template for Java
+
+class Solution {
+    // k is the maximum number of zeros allowed to flip
+    public int maxOnes(int arr[], int k) {
+        // code here
+        int left = 0;
+        int right = 0;
+        int ans = 0;
+        while(right < arr.length){
+            while(k == 0 && arr[right] == 0){
+                if(arr[left] == 0) k++;
+                left++;
+            }
+            if(arr[right] == 0 && k > 0) k--;
+            ans = Math.max(ans, right-left+1);
+            right++;
+        }
+        return ans;
+    }
+}
