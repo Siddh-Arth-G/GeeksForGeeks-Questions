@@ -1,0 +1,33 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/queue-and-deque-gfg-160/problem/maximum-of-all-subarrays-of-size-k3101
+
+//////////Solution
+
+class Pair{
+    int num,ind;
+    Pair(int num,int ind){
+        this.num=num;
+        this.ind=ind;
+    }
+}
+class Solution {
+    public ArrayList<Integer> maxOfSubarrays(int arr[], int k) {
+        // code here
+        ArrayList<Integer> ans=new ArrayList<>();
+        
+        PriorityQueue<Pair> pq=new PriorityQueue<>((x,y)->y.num-x.num);
+        for(int i=0;i<k;i++){
+            pq.offer(new Pair(arr[i],i));
+        }
+        ans.add(pq.peek().num);
+        for(int i=k;i<arr.length;i++){
+            pq.offer(new Pair(arr[i],i));
+            while(i-pq.peek().ind>=k)
+            pq.poll();
+            ans.add(pq.peek().num);
+        }
+        return ans;
+        
+    }
+}
