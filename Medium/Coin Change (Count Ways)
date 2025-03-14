@@ -1,0 +1,40 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/coin-change2448/1
+
+//////////Solution
+
+class Solution {
+    
+    private Integer[][] dp;
+    private int n;
+    
+    private int helper(int curr, int sum,int[] coins){
+        
+        if(curr>=n)
+            return 0;
+            
+        if(sum == 0)
+            return 1;
+            
+        if(dp[curr][sum]!=null)
+            return dp[curr][sum];
+        
+        
+        int consider= 0, notConsider = helper(curr+1,sum,coins);
+        
+        if(coins[curr]<=sum)
+            consider = helper(curr,sum-coins[curr],coins);
+            
+        return dp[curr][sum] = consider + notConsider;
+    }
+    public int count(int coins[], int sum) {
+        // code here.
+        
+        n = coins.length;
+        Arrays.sort(coins);
+        
+        dp = new Integer[n][sum+1];
+        return helper(0,sum,coins);
+    }
+}
