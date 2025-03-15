@@ -1,0 +1,31 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/matrix-bonus-problem/problem/c-matrix-rotation-by-180-degree0745
+
+//////////Solution
+
+// User function Template for Java
+
+class Solution {
+    public void rotateMatrix(int[][] mat) {
+        // code here
+        int row1 =0;
+        int row2 =mat.length-1;
+        while(row1<=row2){
+            for(int col=0;col<mat.length;col++){
+                if(row1==row2 && col>=mat.length/2){
+                    break;
+                }
+                swap(mat, row1, row2, col);
+            }
+            row1++;
+            row2--;
+        }
+    }
+    
+    void swap(int mat[][], int row1, int row2, int col){
+        int tt = mat[row1][col];
+        mat[row1][col] = mat[row2][mat.length-col-1];
+        mat[row2][mat.length-col-1] =tt;
+    }
+}
