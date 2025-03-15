@@ -1,0 +1,34 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/number-of-coins1824/1
+
+//////////Solution
+
+class Solution {
+
+    public int minCoins(int coins[], int sum) {
+        // code here
+        int[] dp = new int[sum + 1];
+        
+        // Initialize the DP array with a value greater than the maximum possible number of coins
+        Arrays.fill(dp, Integer.MAX_VALUE - 1);
+        
+        // Base case: 0 coins are needed to make sum 0
+        dp[0] = 0;
+        
+        // Iterate through all sums from 1 to the target sum
+        for (int i = 1; i <= sum; i++) {
+            // Iterate through all coin denominations
+            for (int coin : coins) {
+                // If the coin value is less than or equal to the current sum
+                if (coin <= i) {
+                    // Update the DP array with the minimum number of coins needed
+                    dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+                }
+            }
+        }
+        
+        // If the target sum cannot be formed, return -1
+        return dp[sum] == Integer.MAX_VALUE - 1 ? -1 : dp[sum];
+    }
+}
