@@ -1,0 +1,26 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/matrix-bonus-problem/problem/generate-a-matrix-with-each-row-and-column-of-given-sum
+
+//////////Solution
+
+// User function Template for Java
+class Solution {
+    public int[][] generateMatrix(int[] rowSum, int[] colSum) {
+        int n=rowSum.length;
+        int m=colSum.length;
+        int mat[][]=new int [n][m];
+        int i=0,j=0;
+        while (i<n && j<m){
+            mat[i][j]=Math.min(rowSum[i],colSum[j]);
+            rowSum[i]-=mat[i][j];
+            colSum[j]-=mat[i][j];
+            if(rowSum[i]==0){
+                i++;
+            }if(colSum[j]==0){
+                j++;
+            }
+        }
+        return mat;
+    }
+}
