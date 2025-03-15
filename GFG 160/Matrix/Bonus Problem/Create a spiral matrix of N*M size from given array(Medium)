@@ -1,0 +1,47 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/matrix-bonus-problem/problem/create-a-spiral-matrix-of-nm-size-from-given-array
+
+//////////Solution
+
+// User function Template for Java
+
+class Solution {
+    public int[][] spiralFill(int n, int m, int[] arr) {
+        // code here
+        int left = 0;
+        int right = m-1;
+        int top = 0;
+        int bottom = n-1;
+        int index = 0;
+        int[][] result = new int[n][m];
+        
+        while(index < arr.length){
+            for(int j=left;j<=right;j++){
+                result[top][j] = arr[index++];
+            }
+            top++;
+            
+            for(int i=top;i<=bottom;i++){
+                result[i][right] = arr[index++];
+            }
+            right--;
+            
+            if(top <= bottom){
+                for(int j=right;j>=left;j--){
+                   result[bottom][j] = arr[index++];
+                }
+                bottom--;
+            }
+            
+            if(left <= right){
+                for(int i=bottom;i>=top;i--){
+                   result[i][left] = arr[index++];
+                }
+                left++;                
+            }
+
+        }
+        return result;
+    }
+}
