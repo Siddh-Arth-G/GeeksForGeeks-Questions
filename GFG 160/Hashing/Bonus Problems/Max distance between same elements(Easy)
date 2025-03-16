@@ -1,0 +1,22 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/hashing-bonus-problem/problem/max-distance-between-same-elements
+
+//////////Solution
+
+class Solution {
+    public int maxDistance(int[] arr) {
+        // Code here
+        HashMap<Integer, Integer> m =new HashMap<>();
+        int max = 0;
+        for(int i=0; i<arr.length; i++){
+            int key = arr[i];
+            if(m.containsKey(key)){
+                max = Math.max(max, i-m.get(key));
+            }else{
+                m.put(key, i);
+            }
+        }
+        return max;
+    }
+}
