@@ -1,0 +1,33 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/two-pointer-technique-bonus-problems/problem/subarrays-with-k-different-integers
+
+//////////Solution
+
+// User function Template for Java
+
+class Solution {
+    static int mostK(int arr[], int k){
+        Map<Integer, Integer> freq = new HashMap<>();
+        int cnt = 0, i = 0;
+        
+        for(int j=0; j<arr.length; j++){
+            freq.put(arr[j], freq.getOrDefault(arr[j], 0)+1);
+            
+            while(freq.size() > k){
+                freq.put(arr[i], freq.get(arr[i])-1);
+                if(freq.get(arr[i]) == 0) freq.remove(arr[i]);
+                i++;
+            }
+            
+            cnt += j - i + 1;
+        }
+        
+        return cnt;
+    }
+    
+    static int exactlyK(int arr[], int k) {
+        // code here
+        return mostK(arr, k) - mostK(arr, k-1);
+    }
+}
