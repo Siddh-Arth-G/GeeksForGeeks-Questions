@@ -1,0 +1,51 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/tree-bonus-problem/problem/count-bst-nodes-that-lie-in-a-given-range
+
+//////////Solution
+
+/*
+class Node
+{
+    int data;
+    Node left, right;
+
+    public Node(int d)
+    {
+        data = d;
+        left = right = null;
+    }
+}
+*/
+class Solution {
+    int getCount(Node root, int l, int h) {
+        // Your code here
+        return cntNodesInRangeHelper(root,l,h);
+    }
+        private int cntNodesInRangeHelper(Node root,int l,int h){
+            if(root==null)
+            return 0;
+            
+        int cnt=0;
+        
+        if(root.data>=l && root.data<=h){
+            cnt++;
+        }
+        /* 
+        means in BST if root > low ,then in left SubTree there must
+        be nodes which are smaller than root ,hence may lie within
+        the range , just greater than l and low than root
+        */
+        if(root.data>l){
+         cnt+=cntNodesInRangeHelper(root.left,l,h);
+    }
+    /*
+    if root< high , then the right subtree > root ,
+    then there are nodes greater than root and may find some nodes in range
+    */
+    if(root.data<h){
+         cnt+=cntNodesInRangeHelper(root.right,l,h);
+    }
+    return cnt;
+        }
+}
