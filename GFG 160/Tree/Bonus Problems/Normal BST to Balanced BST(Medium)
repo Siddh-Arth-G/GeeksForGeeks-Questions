@@ -1,0 +1,43 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/tree-bonus-problem/problem/normal-bst-to-balanced-bst
+
+//////////Solution
+
+/*
+class Node
+{
+    int data;
+    Node right, left;
+    Node(int item)
+    {
+        data = item;
+        left = right = null;
+    }
+}*/
+
+class Solution {
+    int index=0;
+    Node balanceBST(Node root) {
+        // Add your code here.
+        int n=countNodes(root);
+        index=0;
+        return buildBalancedTree(root, n);
+    }
+    int countNodes(Node node) {
+        if (node==null)
+            return 0;
+        return countNodes(node.left)+1+countNodes(node.right);
+    }
+    Node buildBalancedTree(Node root, int n) {
+        if(n<=0)
+            return null;
+        Node left=buildBalancedTree(root, n/2);
+        Node node=new Node(root.data);
+        index++;
+        Node right=buildBalancedTree(root, n-n/2-1);
+        node.left=left;
+        node.right=right;
+        return node;
+    }
+}
