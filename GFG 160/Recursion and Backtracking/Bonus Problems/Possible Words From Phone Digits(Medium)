@@ -1,0 +1,32 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/recursion-bonus-problem/problem/possible-words-from-phone-digits-1587115620
+
+//////////Solution
+
+class Solution {
+    public ArrayList<String> possibleWords(int[] arr) {
+        // code here
+        ArrayList<String> res = new ArrayList<>();
+        String[] patMap = {"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        StringBuilder prefix = new StringBuilder();
+        possibleWordsRec(arr,0,res,patMap,prefix);
+        return res;
+    }
+    public void possibleWordsRec(int[] arr,int index, ArrayList<String> res,String[] patMap,StringBuilder prefix){
+        if(arr.length == index){
+            res.add(prefix.toString());
+            return;
+        }
+        int digit = arr[index];
+        if(digit<2 && digit>9){
+            possibleWordsRec(arr,index+1,res,patMap,prefix);
+            return;
+        }
+        for(char ch : patMap[digit].toCharArray()){
+            prefix.append(ch);
+            possibleWordsRec(arr,index+1,res,patMap,prefix);
+            prefix.deleteCharAt(prefix.length()-1);
+        }
+    }
+}
