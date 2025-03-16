@@ -1,0 +1,42 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/heap-bonus-problems/problem/rearrange-characters4649
+
+//////////Solution
+
+class Solution {
+    public static String rearrangeString(String s) {
+        // code here
+        int n = s.length();
+        int maxcnt=0;
+        char ch='#';
+        HashMap<Character,Integer> freq = new HashMap<>();
+        for(int i=0;i<n;i++) {
+            freq.put(s.charAt(i),freq.getOrDefault(s.charAt(i),0)+1);
+            if(freq.get(s.charAt(i))>maxcnt) {
+                maxcnt = freq.get(s.charAt(i));
+                ch =s.charAt(i);
+            }
+        }
+        if(maxcnt>((n+1)/2)) {
+            return "";
+        }
+        int ind=0;
+        char[] res = s.toCharArray();
+        while(maxcnt>0) {
+            res[ind]=ch;
+            ind = ind+2;
+            maxcnt--;
+        }
+        freq.put(ch,0);
+        for(char c='a';c<='z';c++) {
+            while(freq.getOrDefault(c,0)>0) {
+                ind = (ind>=n) ?1:ind;
+                res[ind]=c;
+                ind+=2;
+                freq.put(c,freq.get(c)-1);
+            }
+        }
+        return new String(res);
+    }
+}
