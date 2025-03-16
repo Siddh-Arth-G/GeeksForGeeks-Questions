@@ -1,0 +1,58 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/two-pointer-technique-bonus-problems/problem/find-all-four-sum-numbers1732
+
+//////////Solution
+
+// User function Template for Java
+
+// arr[] : int input array of integers
+// target : the quadruple sum required
+
+class Solution {
+    public List<List<Integer>> fourSum(int[] arr, int target) {
+        Arrays.sort(arr);
+        int n = arr.length;
+        HashMap<Integer,Integer> map = new HashMap<>();
+        ArrayList<List<Integer>> res = new ArrayList<>();
+        HashSet<String> set = new HashSet<>();
+        for(int i = 0 ; i < n ; i++){
+            map.put(arr[i] , map.getOrDefault(arr[i],0) +1 );
+        }
+        for(int i = 0 ; i < n ; i++){
+            for(int j = i+1 ; j < n ; j++){
+                for(int k = j+1 ; k < n ; k++){
+                    int sum = arr[i] + arr[j] + arr[k];
+                    int t = target-sum;
+                    if(map.containsKey(t) == false){
+                        continue;
+                    }
+                    int count = map.get(t);
+                    if(arr[i]==t){
+                        count--;
+                    }
+                    if(arr[j]==t){
+                        count--;
+                    }
+                    if(arr[k]==t){
+                        count--;
+                    }
+                    if(count<=0){
+                        continue;
+                    }
+                    ArrayList<Integer> list = new ArrayList<>(List.of(arr[i],arr[j],arr[k],t));
+                    Collections.sort(list);
+                    String s = list.toString();
+                    if(set.contains(s)){
+                        continue;
+                    }
+                    set.add(s);
+                    res.add(list);
+                }
+            }
+        }
+        // System.out.println(res.size());
+        
+        return res;
+    }
+}
