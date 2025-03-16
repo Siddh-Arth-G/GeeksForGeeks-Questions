@@ -1,0 +1,40 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/prefix-sum-bonus-problem/problem/sub-array-sum-divisible-by-k2617
+
+//////////Solution
+
+// User function Template for Java
+
+class Solution {
+    // Function to count the number of subarrays with a sum that is divisible by K
+    public int subCount(int[] arr, int k) {
+        // HashMap to store the frequency of remainders when prefix sums are taken modulo k
+        HashMap<Integer, Integer> remainderCount = new HashMap<>();
+        
+        // Initialize the remainderCount with the base case (sum 0 is divisible by k)
+        remainderCount.put(0, 1);
+        
+        int count = 0;
+        long currentSum = 0;
+
+        // Iterate through the array
+        for (int num : arr) {
+            // Update the current running sum
+            currentSum += num;
+            
+            // Calculate the remainder of currentSum modulo k, ensuring it is always non-negative
+            int remainder = (int) ((currentSum % k + k) % k);  // Convert to int as the map keys are integers
+
+            // If the remainder has been seen before, it means there are subarrays 
+            // whose sum is divisible by k, add the frequency of that remainder to the count
+            count += remainderCount.getOrDefault(remainder, 0);
+            
+            // Update the frequency of the current remainder in the map
+            remainderCount.put(remainder, remainderCount.getOrDefault(remainder, 0) + 1);
+        }
+
+        // Return the total count of subarrays whose sum is divisible by k
+        return count;
+    }
+}
