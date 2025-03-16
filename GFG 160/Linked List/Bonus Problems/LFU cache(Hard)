@@ -1,0 +1,79 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/LL-bonus-problem/problem/lfu-cache-1665050355
+
+//////////Solution
+
+// User function Template for Java
+
+class LFUCache {
+    
+    class Node{
+        int key, value, freq;
+        Node(int k, int v){
+            key = k;
+            value = v;
+            freq = 1;
+        }
+    }
+    
+    private final int capacity;
+    private int minFreq;
+    private final Map<Integer, Node> keyToNode;
+    private final Map<Integer, LinkedHashSet<Node>> freqToNode;
+
+    public LFUCache(int cap) {
+        // code here
+        this.capacity = cap;
+        this.minFreq = 0;
+        this.keyToNode = new HashMap<>();
+        this.freqToNode = new HashMap<>();
+    }
+
+    public int get(int key) {
+        // code here
+        if(!keyToNode.containsKey(key)) return -1;
+        Node node = keyToNode.get(key);
+        updateFreq(node);
+        return node.value;
+    }
+
+    public void put(int key, int value) {
+        // code here
+        if(capacity == 0) return ;
+        
+        if(keyToNode.containsKey(key)){
+            Node node = keyToNode.get(key);
+            node.value = value;
+            updateFreq(node);
+        }else{
+            if(keyToNode.size() >= capacity) removeLFU();
+            
+            Node newNode = new Node(key, value);
+            keyToNode.put(key, newNode);
+            freqToNode.computeIfAbsent(1, k -> new LinkedHashSet<>()).add(newNode);
+            minFreq = 1;
+        }
+    }
+    private void updateFreq(Node node){
+        int freq = node.freq;
+        freqToNode.get(freq).remove(node);
+        if(freqToNode.get(freq).isEmpty() && freq == minFreq) minFreq++;
+        
+        node.freq++;
+        freqToNode.computeIfAbsent(node.freq, k-> new LinkedHashSet<>()).add(node);
+    }
+    
+    private void removeLFU(){
+        Node toRemove = freqToNode.get(minFreq).iterator().next();
+        freqToNode.get(minFreq).remove(toRemove);
+        keyToNode.remove(toRemove.key);
+    }
+}
+
+/**
+ * Your LFUCache object will be instantiated and called as such:
+ * LFUCache obj = new LFUCache(capacity);
+ * int param_1 = obj.get(key);
+ * obj.put(key,value);
+ */
