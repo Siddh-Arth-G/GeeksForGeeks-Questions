@@ -1,0 +1,51 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/prefix-sum-bonus-problem/problem/largest-rectangular-sub-matrix-whose-sum-is-0
+
+//////////Solution
+
+
+class Solution {
+    public static int zeroSumSubmat(int[][] mat) {
+        
+        
+        int ans = 0;
+        
+        int row = mat.length;
+        int col = mat[0].length;
+        
+        for(int i = 0;i<row;i++){
+            int[] arr = new int[col];
+            for(int j = i;j<row;j++){
+                
+                for(int k = 0;k<col;k++){
+                    arr[k]+=mat[j][k];
+                }
+                
+                int len = getMaxZero(arr);
+                ans = Math.max(ans, len*(j-i+1));
+            }
+            
+        }
+        
+        return ans;
+    }
+    
+    static int getMaxZero(int []arr){
+        int maxLen = Integer.MIN_VALUE;
+        Map<Integer,Integer> map = new HashMap<>();
+        int sum = 0;
+        
+        for(int i =0;i<arr.length;i++){
+            sum+=arr[i];
+            if(sum == 0) maxLen = i+1;
+            if(map.containsKey(sum)){
+                maxLen =Math.max(maxLen,i-map.get(sum));
+            }
+            map.put(sum,i);
+        }
+        
+        return maxLen==Integer.MIN_VALUE ?-1:maxLen;
+        
+    }
+}
