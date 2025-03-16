@@ -1,0 +1,46 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/recursion-bonus-problem/problem/combination-sum-1587115620
+
+//////////Solution
+
+// User function template for JAVA
+
+class Solution {
+    // Function to find all combinations of elements
+    // in array arr that sum to target.
+    static ArrayList<ArrayList<Integer>> combinationSum(int[] arr, int target) {
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+        ArrayList<Integer> a = new ArrayList<>();
+        generateCombinations(0, a, 0, arr, target, ans);
+        return ans;
+    }
+    
+    public static void generateCombinations(int index, ArrayList<Integer> a, int sum, int parent[], int target, ArrayList<ArrayList<Integer>> ans) {
+
+        if(sum == target) {
+            ans.add(new ArrayList<Integer>(a));
+            return;
+        }
+
+        if(index == parent.length) {
+            return;
+        }
+
+        if(sum > target) {
+            return;
+        }
+
+        // picking 
+        a.add(parent[index]);
+        sum += parent[index];
+        generateCombinations(index, a, sum, parent, target, ans);
+
+
+        // not picking
+        a.remove(a.size() - 1);
+        sum -= parent[index];
+        generateCombinations(index+1, a, sum, parent, target, ans);
+
+    }
+}
