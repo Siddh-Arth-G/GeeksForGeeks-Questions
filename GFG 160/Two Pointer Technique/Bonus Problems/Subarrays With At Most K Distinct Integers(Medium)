@@ -1,0 +1,31 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/two-pointer-technique-bonus-problems/problem/subarrays-with-at-most-k-distinct-integers
+
+//////////Solution
+
+// User function Template for Java
+
+class Solution {
+    public int atMostK(int arr[], int k) {
+        // code here
+        int n = arr.length;
+        int i = 0, cnt = 0;
+        
+        Map<Integer, Integer> freq = new HashMap<>();
+        
+        for(int j=0; j<n; j++){
+            freq.put(arr[j], freq.getOrDefault(arr[j], 0)+1);
+            
+            while(freq.size() > k){
+                freq.put(arr[i], freq.get(arr[i])-1);
+                if(freq.get(arr[i]) == 0) freq.remove(arr[i]);
+                i++;
+            }
+            
+            cnt += j - i + 1;
+        }
+        
+        return cnt;
+    }
+}
