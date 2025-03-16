@@ -1,0 +1,42 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/tree-bonus-problem/problem/corona-vaccine--141631
+
+//////////Solution
+
+/*
+class Node{
+    int data;
+    Node left, right;
+
+    Node(int item)
+    {
+        data = item;
+        left = right = null;
+    }
+}
+*/
+class Solution {
+    public static int count=0;
+    public static int dfs(Node root) {
+        if(root==null) return 1;
+        int left=dfs(root.left);
+        int right=dfs(root.right);
+        if(left==-1 || right==-1) {
+            count++;
+            return 0;
+        }
+        if(left==0 || right==0) {
+            return 1;
+        }
+        return -1;
+    }
+    public static int supplyVaccine(Node root) {
+        // Your code here
+        count=0;
+        if(dfs(root)==-1) {
+            count++;
+        }
+        return count;
+    }
+}
