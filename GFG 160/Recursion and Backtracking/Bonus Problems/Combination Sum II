@@ -1,0 +1,35 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/recursion-bonus-problem/problem/combination-sum-ii-1664263832
+
+//////////Solution
+
+// User function template for JAVA
+
+class Solution {
+    // Function to find all combinations of elements
+    // in array arr that sum to target.
+    static ArrayList<ArrayList<Integer>> uniqueCombinations(int[] arr, int target) {
+        // add your code here
+        ArrayList<ArrayList<Integer>> li = new ArrayList<>();
+        Arrays.sort(arr);
+        findCombinations(0,arr,target,li,new ArrayList<>());
+        return li;
+    }
+    private static void findCombinations(int ind, int arr[],int tar,ArrayList<ArrayList<Integer>> ans,ArrayList<Integer> li){
+        if(tar == 0){
+            ans.add(new ArrayList<>(li));
+        }
+        for(int i = ind; i <= arr.length - 1; i++){
+            if(i > ind && arr[i] == arr[i - 1]){
+                continue;
+            }
+            if(arr[i] > tar){
+                break;
+            }
+            li.add(arr[i]);
+            findCombinations(i + 1, arr, tar - arr[i], ans, li);
+            li.remove(li.size() - 1);
+        }
+    }
+}
