@@ -1,0 +1,31 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/two-pointer-technique-bonus-problems/problem/minimum-removals-for-target-sum
+
+//////////Solution
+
+class Solution {
+    public int minRemovals(int[] arr, int k) {
+        // code here
+        int n = arr.length;
+        
+        int arrSum = 0;
+        for(Integer ele : arr) arrSum += ele;
+        
+        int target = arrSum - k;
+        int left = 0, sum = 0, len = -1;
+        
+        for(int right=0; right<n; right++){
+            sum += arr[right];
+            
+            while(sum > target){
+                sum -= arr[left];
+                left++;
+            }
+            
+            if(sum == target) len = Math.max(len, right-left+1);
+        }
+        
+        return len == -1 ? -1 : n - len;
+    }
+}
