@@ -1,0 +1,33 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/tree-bonus-problem/problem/symmetric-tree
+
+//////////Solution
+
+/*
+class of the node of the tree is as
+class Node{
+    int data;
+    Node left;
+    Node right;
+    Node(int data){
+        this.data = data;
+        left=null;
+        right=null;
+    }
+}
+
+*/
+class Solution {
+    public static boolean isSymmetric(Node root) {
+        return recursion(root,root);
+    } 
+    public static boolean recursion(Node root1,Node root2){
+        if(root1==null && root2==null)return true;
+        else if(root1==null || root2==null)return false;
+        
+        else if(root1.data!=root2.data)return false;
+        
+        return (recursion(root1.left,root2.right) && recursion(root1.right,root2.left));
+    }
+}
