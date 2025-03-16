@@ -1,0 +1,39 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/LL-bonus-problem/problem/intersection-point-in-y-shapped-linked-lists
+
+//////////Solution
+
+/* Node of a linked list
+ class Node {
+   int data;
+    Node next;
+    Node(int d)  { data = d;  next = null; }
+}
+ Linked List class
+class LinkedList
+{
+    Node head;  // head of list
+}*/
+
+class Intersect {
+    // Function to find intersection point in Y shaped Linked Lists.
+    static Node intersectPoint(Node head1, Node head2) {
+        HashSet<Node> set = new HashSet<>();
+        Node curr1 = head1;
+        
+        while(curr1!= null){
+            set.add(curr1);
+            curr1 = curr1.next;
+        }
+        curr1 = head2;
+        while(curr1 != null){
+            if(set.contains(curr1)){
+                return curr1;
+            }
+            curr1 = curr1.next;
+        }
+        return null;
+        
+    }
+}
