@@ -1,0 +1,21 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/hashing-bonus-problem/problem/min-subsets-with-consecutive-numbers0601
+
+//////////Solution
+
+// User function Template for Java
+
+class Solution {
+    public int numOfSubset(int[] arr) {
+        // Your code goes here
+        Arrays.sort(arr);
+        int idx = 1;
+        for(int i = 0 ; i< arr.length-1; i++){
+                if (arr[i]+ 1 != arr[i+1])
+                    idx++;
+                
+            
+        } return idx ; 
+    }
+}
