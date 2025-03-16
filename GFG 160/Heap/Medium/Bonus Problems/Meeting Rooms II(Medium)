@@ -1,0 +1,26 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/heap-bonus-problems/problem/attend-all-meetings-ii
+
+//////////Solution
+
+class Solution {
+    public int minMeetingRooms(int[] start, int[] end) {
+        // code here
+        int result=0;
+        Arrays.sort(start);
+        Arrays.sort(end);
+        int startPtr=0;
+        int endPtr=0;
+        while(startPtr<start.length){
+            if(start[startPtr]>=end[endPtr]){
+                result--; //Free a room
+                endPtr++;
+            }
+            result++;
+            startPtr++;
+        }
+        return result;
+        
+    }
+}
