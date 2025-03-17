@@ -1,0 +1,30 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/subset-sum-problem-1611555638/1
+
+//////////Solution
+
+class Solution {
+
+    static Boolean isSubsetSum(int arr[], int sum) {
+        // code here
+        return generate(0, arr, sum, 0);
+    }
+    static Boolean generate(int i, int[] arr, int sum, int c_sum){
+        if(c_sum == sum){
+            return true;
+        }
+        if(c_sum > sum || i >= arr.length){
+            return false;
+        }
+        c_sum += arr[i];
+        if(generate(i+1, arr, sum, c_sum)){
+            return true;
+        }
+        c_sum -= arr[i];
+        if(generate(i+1, arr, sum, c_sum)){
+            return true;
+        }
+        return false;
+    }
+}
