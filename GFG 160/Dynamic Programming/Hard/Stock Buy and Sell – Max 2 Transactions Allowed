@@ -1,0 +1,22 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/dynamic-programming-gfg-160/problem/buy-and-sell-a-share-at-most-twice
+
+//////////Solution
+
+class Solution {
+    public static int maxProfit(int[] prices) {
+        // code here
+        int b1 = Integer.MAX_VALUE;
+        int b2 = Integer.MAX_VALUE;
+        int p1 = 0;
+        int p2 = 0;
+        for(int i: prices){
+            b1 = Math.min(b1, i);
+            p1 = Math.max(p1, i-b1);
+            b2 = Math.min(b2, i-p1);
+            p2 = Math.max(p2, i-b2);
+        }
+        return p2;
+    }
+}
