@@ -1,0 +1,19 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/buy-and-sell-a-share-at-most-twice/1
+
+//////////Solution
+
+class Solution { // Cmrit@@1919
+    public static int maxProfit(int[] prices) {
+        int b1 = Integer.MAX_VALUE, p1 = 0, 
+        b2 = Integer.MAX_VALUE, p2 = 0;
+        for(int i : prices){
+            b1 = Math.min(b1, i);
+            p1 = Math.max(p1, i-b1);
+            b2 = Math.min(b2, i-p1);
+            p2 = Math.max(p2, i-b2);
+        }
+        return p2;
+    }
+}
