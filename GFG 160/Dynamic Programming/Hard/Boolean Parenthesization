@@ -1,0 +1,64 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/dynamic-programming-gfg-160/problem/boolean-parenthesization5610
+
+//////////Solution
+
+// User function Template for Java
+class Solution {
+    static int countWays(String s) {
+        // code here
+        int n = s.length();
+        
+        // dpTrue[i][j] will store the number of ways the substring from i to j evaluates to True.
+        // dpFalse[i][j] will store the number of ways the substring from i to j evaluates to False.
+        int[][] dpTrue = new int[n][n];
+        int[][] dpFalse = new int[n][n];
+        
+        // Base case: A single character is either T or F
+        for (int i = 0; i < n; i++) {
+            if (s.charAt(i) == 'T') {
+                dpTrue[i][i] = 1;
+                dpFalse[i][i] = 0;
+            } else if (s.charAt(i) == 'F') {
+                dpTrue[i][i] = 0;
+                dpFalse[i][i] = 1;
+            }
+        }
+        
+        // Fill the dp tables for substrings of length 2 or more
+        for (int len = 3; len <= n; len += 2) { // len should be odd, since the length is always in the pattern "operand operator operand"
+            for (int i = 0; i <= n - len; i++) {
+                int j = i + len - 1;
+                
+                // Reset dpTrue[i][j] and dpFalse[i][j] for the current substring
+                dpTrue[i][j] = 0;
+                dpFalse[i][j] = 0;
+                
+                // Iterate through each operator in the current substring and divide at that operator
+                for (int k = i + 1; k < j; k += 2) { // k must be an operator position
+                    char op = s.charAt(k);
+                    
+                    // Total ways to split the problem based on operator `op`
+                    int totalLeftTrue = dpTrue[i][k-1];
+                    int totalLeftFalse = dpFalse[i][k-1];
+                    int totalRightTrue = dpTrue[k+1][j];
+                    int totalRightFalse = dpFalse[k+1][j];
+                    
+                    if (op == '&') {
+                        dpTrue[i][j] += totalLeftTrue * totalRightTrue;
+                        dpFalse[i][j] += totalLeftTrue * totalRightFalse + totalLeftFalse * totalRightTrue + totalLeftFalse * totalRightFalse;
+                    } else if (op == '|') {
+                        dpTrue[i][j] += totalLeftTrue * totalRightTrue + totalLeftTrue * totalRightFalse + totalLeftFalse * totalRightTrue;
+                        dpFalse[i][j] += totalLeftFalse * totalRightFalse;
+                    } else if (op == '^') {
+                        dpTrue[i][j] += totalLeftTrue * totalRightFalse + totalLeftFalse * totalRightTrue;
+                        dpFalse[i][j] += totalLeftTrue * totalRightTrue + totalLeftFalse * totalRightFalse;
+                    }
+                }
+            }
+        }
+        
+        return dpTrue[0][n-1];
+    }
+}
