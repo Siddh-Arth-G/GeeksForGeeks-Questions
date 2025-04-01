@@ -1,0 +1,30 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/maximize-partitions-in-a-string/1
+
+//////////Solution
+
+class Solution {
+    public int maxPartitions(String s) {
+        int[] lastIndex = new int[26];  // Store last occurrence of each character
+        int n = s.length();
+
+        // Step 1: Store last index of each character
+        for (int i = 0; i < n; i++) {
+            lastIndex[s.charAt(i) - 'a'] = i;
+        }
+
+        int partitions = 0;
+        int end = 0;
+
+        // Step 2: Traverse the string and find partitions
+        for (int i = 0; i < n; i++) {
+            end = Math.max(end, lastIndex[s.charAt(i) - 'a']);  // Expand partition
+            if (i == end) {  // If reached the end of partition
+                partitions++;
+            }
+        }
+
+        return partitions;
+    }
+}
