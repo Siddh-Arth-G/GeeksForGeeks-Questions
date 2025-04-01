@@ -1,0 +1,33 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/dp-bonus-problems/problem/word-break-part-23249
+
+//////////Solution
+
+// User function Template for Java
+class Solution {
+    static String[] wordBreak(String[] dict, String s) {
+        // code here
+        Set<String> wordDict = new HashSet<>(Arrays.asList(dict));
+        List<String> result = new ArrayList<>();
+        backtrack(s, wordDict, new StringBuilder(), 0, result);
+        return result.toArray(new String[0]);
+    }
+    private static void backtrack(String s, Set<String> wordDict, StringBuilder path, int start, List<String> result){
+        if(start == s.length()){
+            result.add(path.toString().trim());
+            return;
+        }
+        
+        for(int end = start+1; end<=s.length(); end++){
+            String word = s.substring(start, end);
+            if(wordDict.contains(word)){
+                int len = path.length();
+                if(len > 0) path.append(" ");
+                path.append(word);
+                backtrack(s, wordDict, path, end, result);
+                path.setLength(len);
+            }
+        }
+    }
+}
