@@ -1,0 +1,32 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/greedy-bonus-problems/problem/largest-number-in-one-swap1520
+
+//////////Solution
+
+// User function Template for Java
+
+class Solution {
+    String largestSwap(String s) {
+        // code here
+        char[] numArray = s.toCharArray();
+        
+        int[] lastOccurence = new int[10];
+        
+        for(int i=0; i<numArray.length; i++){
+            lastOccurence[numArray[i] - '0'] = i;
+        }
+        for(int i=0; i<numArray.length; i++){
+            for(int d = 9; d>numArray[i]-'0'; d--){
+                if(lastOccurence[d] > i){
+                    int idx = lastOccurence[d];
+                    char temp = numArray[i];
+                    numArray[i] = numArray[idx];
+                    numArray[idx] = temp;
+                    return new String(numArray);
+                }
+            }
+        }
+        return s;
+    }
+}
