@@ -1,0 +1,27 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/circular-tour-1587115620/1
+
+//////////Solution
+
+class Solution {
+    public int startStation(int[] gas, int[] cost) {
+        // Your code here
+        int t=0,req=0;
+        for(int i=0;i<cost.length;i++){
+            req+=cost[i];
+            t+=gas[i];
+        }
+        if(t<req)return -1;
+        int ans=0;
+        int curr=0;
+        for(int i=0;i<gas.length;i++){
+            curr+=gas[i]-cost[i];
+            if(curr<0){
+                ans=i+1;
+                curr=0;
+            }
+        }
+        return ans;
+    }
+}
