@@ -1,0 +1,37 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/greedy-gfg-160/problem/minimum-platforms-1587115620
+
+//////////Solution
+
+// User function Template for Java
+class Solution {
+    // Function to find the minimum number of platforms required at the railway station
+    static int findPlatform(int arr[], int dep[]) {
+        // Sort the arrival and departure times
+        Arrays.sort(arr);
+        Arrays.sort(dep);
+        
+        int n = arr.length; // Number of trains
+        int platformsNeeded = 0; // Current platforms in use
+        int maxPlatforms = 0; // Maximum platforms required
+        
+        int i = 0, j = 0; // Pointers for arrival and departure arrays
+        
+        // Traverse both arrays
+        while (i < n && j < n) {
+            // If a train arrives before the previous one departs, increase platform count
+            if (arr[i] <= dep[j]) {
+                platformsNeeded++;
+                i++; // Move to next arrival
+            } else { // A train departs, so reduce platform count
+                platformsNeeded--;
+                j++; // Move to next departure
+            }
+            // Update maximum platforms needed
+            maxPlatforms = Math.max(maxPlatforms, platformsNeeded);
+        }
+        
+        return maxPlatforms;
+    }
+}
