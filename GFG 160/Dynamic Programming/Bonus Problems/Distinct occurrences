@@ -1,0 +1,38 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/dp-bonus-problems/problem/distinct-occurrences
+
+//////////Solution
+
+class Solution {
+    public int subseqCount(String txt, String pat) {
+        // code here
+        int[] arr = new int[txt.length()];
+        for(int i=0; i<txt.length(); i++){
+            if(txt.charAt(i) == pat.charAt(pat.length()-1)){
+                arr[i] = 1;
+            }
+        }
+        int count;
+        int prev;
+        for(int i=pat.length()-2; i>=0; i--){
+            count = 0;
+            for(int j=txt.length()-1; j>=0; j--){
+                prev = arr[j];
+                if(txt.charAt(j) == pat.charAt(i)){
+                    arr[j] = count;
+                }
+                if(txt.charAt(j) == pat.charAt(i+1)){
+                    count += prev;
+                }
+            }
+        }
+        int ans = 0;
+        for(int i=0; i<txt.length(); i++){
+            if(txt.charAt(i) == pat.charAt(0)){
+                ans += arr[i];
+            }
+        }
+        return ans;
+    }
+}
