@@ -1,0 +1,34 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/bfs-traversal-of-graph/1
+
+//////////Solution
+
+// User function Template for Java
+class Solution {
+    // Function to return Breadth First Search Traversal of given graph.
+    public ArrayList<Integer> bfs(ArrayList<ArrayList<Integer>> adj) {
+        // code here
+        ArrayList<Integer>helper  = new ArrayList<>();
+        Queue<Integer>queue = new LinkedList<>();
+        boolean[]visited  = new boolean[adj.size()];
+        for(int i =0;i<adj.size();i++){
+            if(!visited[i]){
+                visited[i] = true;
+                queue.offer(i);
+            }
+        while(!queue.isEmpty()){
+            int node  = queue.poll();
+            helper.add(node);
+        for(int neighbour : adj.get(node)){
+            if(!visited[neighbour]){
+                visited[neighbour] = true;
+                queue.add(neighbour);
+            }
+        }
+       
+        }
+        }
+        return helper;
+    }
+}
