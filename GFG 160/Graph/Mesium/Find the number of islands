@@ -1,0 +1,63 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/graph-gfg-160/problem/find-the-number-of-islands
+
+//////////Solution
+
+class Solution {
+    class pair{
+        int i;
+        int j;
+        pair(int i,int j)
+        {
+            this.i=i;
+            this.j=j;
+        }
+    }
+    public void bfs(char grid[][],int visit[][],int i,int j)
+    {
+        int n=grid.length;
+        int m=grid[0].length;
+        int x[]={-1,1,0,0,-1,1,-1,1};
+        int y[]={0,0,1,-1,-1,1,1,-1};
+        Queue<pair> q=new LinkedList<>();
+        visit[i][j]=1;
+        q.add(new pair(i,j));
+        while(!q.isEmpty())
+        {
+            int s=q.size();
+            for(int t=0;t<s;t++)
+            {
+                pair temp =q.poll();
+                for(int d=0;d<8;d++)
+                {
+                    int a=temp.i+x[d];
+                    int b=temp.j+y[d];
+                    
+                    if(a>=0&&b>=0&&a<n&&b<m&&visit[a][b]==0&&grid[a][b]=='L')
+                    {
+                        visit[a][b]=1;
+                        q.add(new pair(a,b));
+                    }
+                }
+            }
+        }
+    }
+    public int countIslands(char[][] grid) {
+        // Code here
+        int visit[][]=new int[grid.length][grid[0].length];
+        int c=0;
+        for(int i=0;i<grid.length;i++)
+        {
+            for(int j=0;j<grid[0].length;j++)
+            {
+                if(grid[i][j]=='L'&&visit[i][j]==0)
+                {
+                    bfs(grid,visit,i,j);
+                    c++;
+                }
+            }
+        }
+        return c;
+    }
+}
