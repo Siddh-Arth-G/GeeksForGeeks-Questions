@@ -1,0 +1,64 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/searching-bonus-problems/problem/minimum-days-to-make-m-bouquets
+
+//////////Solution
+
+// User function Template for Java
+
+class Solution {
+    private static int maxi(int a[]){
+        int ans = Integer.MIN_VALUE;
+        for(int d: a){
+            if(d > ans){
+                ans = d;
+            }
+        }
+        return ans;
+    }
+    private static int mini(int a[]){
+        int ans = Integer.MAX_VALUE;
+        for(int d: a){
+            if(d < ans){
+                ans = d;
+            }
+        }
+        return ans;
+    }
+    private static int check(int a[], int k, int minus){
+        int count = 0;
+        int ans = 0;
+        for(int i=0; i<a.length; i++){
+            if(a[i] <= minus){
+                count++;
+                if(count == k){
+                    ans++;
+                    count = 0;
+                }
+            }else{
+                count = 0;
+            }
+        }
+        return ans;
+    }
+    public static int minDaysBloom(int m, int k, int[] arr) {
+        // code here
+        if(m * k > arr.length){
+            return -1;
+        }
+        int l = mini(arr);
+        int h = maxi(arr);
+        int ans = -1;
+        while(l <= h){
+            int mi = l+(h-l)/2;
+            int boquets = check(arr, k, mi);
+            if(boquets >= m){
+                ans = mi;
+                h = mi - 1;
+            }else{
+                l = mi + 1;
+            }
+        }
+        return ans;
+    }
+}
