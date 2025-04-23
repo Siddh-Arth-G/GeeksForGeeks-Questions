@@ -1,0 +1,59 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/graph-bonus-problems/problem/connected-components-in-an-undirected-graph
+
+//////////Solution
+
+class DisjointSet{
+    int parent[];
+    int rank[];
+    public DisjointSet(int n){
+        parent = new int[n];
+        rank = new int[n];
+        for(int i=0; i<parent.length; i++){
+            parent[i]=i;
+        }
+    }
+    public int findParent(int n){
+        if(parent[n]==n){
+            return n;
+        }else{
+            return parent[n]=findParent(parent[n]);
+        }
+    }
+    public boolean union(int u, int v){
+        int mu=findParent(u);
+        int mv=findParent(v);
+        if(mu == mv){
+            return false;
+        }else{
+            if(rank[mu]<rank[mv]){
+                parent[mu] = mv;
+            }else if(rank[mv]<rank[mu]){
+                parent[mv]=mu;
+            }else{
+                parent[mu]=mv;
+                rank[mu]++;
+            }
+            return true;
+        }
+    }
+}
+class Solution {
+    public ArrayList<ArrayList<Integer>> getComponents(int V, int[][] edges) {
+        // code here
+        DisjointSet s = new DisjointSet(V);
+        for(int i[]: edges){
+            s.union(i[0],i[1]);
+        }
+        HashMap<Integer, ArrayList<Integer>> m = new HashMap<>();
+        for(int i=0; i<V; i++){
+            int parent = s.findParent(i);
+            m.putIfAbsent(parent, new ArrayList<>());
+            m.get(parent).add(i);
+        }
+        
+        return new ArrayList<>(m.values());
+        
+    }
+}
