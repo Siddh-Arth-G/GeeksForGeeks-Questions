@@ -1,0 +1,27 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/bit-manipulation-gfg-160/problem/find-unique-number
+
+//////////Solution
+
+class Solution {
+    public int findUnique(int[] arr) {
+        // code here
+        int n = arr.length;
+        
+        int sum = 0;
+        Set<Integer> set = new HashSet<>();
+        
+        for(int num : arr) {
+            sum +=  num;
+            set.add(num);
+        }
+        
+        int calSum = 0;
+        for(int num : set) {
+            calSum += num;
+        }
+        
+        return (2 * calSum) - sum;
+    }
+}
