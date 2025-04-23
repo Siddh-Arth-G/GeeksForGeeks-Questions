@@ -1,0 +1,63 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/tries-bonus-problems/problem/longest-valid-word-with-all-prefixes
+
+//////////Solution
+
+class Solution {
+    String ans;
+    int maxLen;
+    public String longestValidWord(String[] words) {
+        // code here
+        ans = "";
+        maxLen = 0;
+        Trie trie = new Trie();
+        for(String word: words){
+            trie.insert(word);
+        }
+        wordWithAllPrefixes(trie.root, "");
+        return ans;
+    }
+    void wordWithAllPrefixes(TrieNode node, String currWord){
+        if(!node.endFlag && currWord.length() > 0){
+            return;
+        }
+        if(currWord.length() > maxLen || (currWord.length() == maxLen && currWord.compareTo(ans) < 0)){
+            ans = currWord;
+            maxLen = currWord.length();
+        }
+        
+        for(Map.Entry<Character, TrieNode> child: node.links.entrySet()){
+            wordWithAllPrefixes(child.getValue(), currWord + child.getKey());
+        }
+    }
+}
+
+class TrieNode{
+    Map<Character, TrieNode> links;
+    boolean endFlag;
+    
+    TrieNode(){
+        links = new HashMap<>();
+        endFlag = false;
+    }
+}
+class Trie{
+    TrieNode root;
+    
+    Trie(){
+        root = new TrieNode();
+    }
+    
+    void insert(String word){
+        TrieNode node = root;
+        
+        for(Character ch: word.toCharArray()){
+            if(!node.links.containsKey(ch)){
+                node.links.put(ch, new TrieNode());
+            }
+            node = node.links.get(ch);
+        }
+        node.endFlag = true;
+    }
+}
