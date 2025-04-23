@@ -1,0 +1,56 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/graph-gfg-160/problem/clone-graph
+
+//////////Solution
+
+// User function Template for Java
+
+/*
+    class Node{
+        int val;
+        ArrayList<Node> neighbors;
+        public Node(){
+            val = 0;
+            neighbors = new ArrayList<>();
+        }
+
+        public Node(int val){
+            this.val = val;
+            neighbors = new ArrayList<>();
+        }
+
+        public Node(int val, ArrayList<Node> neighbors){
+            this.val = val;
+            this.neighbors = neighbors;
+        }
+    }
+*/
+class Solution {
+    public Node cloneGraph(Node node) {
+        if (node == null) return null;
+
+        // Map to keep track of copied nodes
+        Map<Node, Node> map = new HashMap<>();
+        
+        return dfsClone(node, map);
+    }
+
+    private Node dfsClone(Node node, Map<Node, Node> map) {
+        // If already cloned
+        if (map.containsKey(node)) {
+            return map.get(node);
+        }
+
+        // Clone the node
+        Node copy = new Node(node.val);
+        map.put(node, copy);
+
+        // Recursively clone neighbors
+        for (Node neighbor : node.neighbors) {
+            copy.neighbors.add(dfsClone(neighbor, map));
+        }
+
+        return copy;
+    }
+}
