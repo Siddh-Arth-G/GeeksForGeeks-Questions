@@ -1,0 +1,26 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/bit-manipulation-bonus-problems/problem/subsets-1613027340
+
+//////////Solution
+
+// User function Template for Java
+
+class Solution {
+    public ArrayList<ArrayList<Integer>> subsets(int arr[]) {  
+        Arrays.sort(arr);
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        ArrayList<Integer> list = new ArrayList<>();
+        subSet(res,list,arr,0);
+        return res;
+    }
+    static void subSet(ArrayList<ArrayList<Integer>> res,ArrayList<Integer> list,int arr[],int start) {
+        res.add(new ArrayList<>(list));
+        for(int i = start;i<arr.length;i++) {
+            list.add(arr[i]);
+            subSet(res,list,arr,i+1);
+            //BackTrack
+            list.remove(list.size()-1);
+        }
+    }
+}
