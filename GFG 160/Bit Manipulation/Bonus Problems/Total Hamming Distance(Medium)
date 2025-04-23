@@ -1,0 +1,29 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/bit-manipulation-bonus-problems/problem/total-hamming-distance
+
+//////////Solution
+
+// User function Template for Java
+class Solution {
+    int totHammingDist(int arr[]) {
+        // code here
+        int n = arr.length;
+        int[] countOnes = new int[32];
+        
+        for(int num : arr){
+            int mask = 1;
+            for(int i=0; i<32; i++){
+                if((num & mask) != 0){
+                    countOnes[i]++;
+                }
+                mask <<= 1;
+            }
+        }
+        int total = 0;
+        for(int i=0; i<32; i++){
+            total += countOnes[i] * (n - countOnes[i]);
+        }
+        return total;
+    }
+}
