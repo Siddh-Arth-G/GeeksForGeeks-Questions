@@ -1,0 +1,30 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/bit-manipulation-gfg-160/problem/finding-the-numbers0215
+
+//////////Solution
+
+class Solution {
+    public int[] singleNum(int[] arr) {
+        // Code here
+        HashSet <Integer> set = new HashSet<>();
+        
+        for(int num : arr) {
+            if(set.contains(num)) {
+                set.remove(num);
+            }
+            else {
+                set.add(num);
+            }
+        }
+        
+        int[] res = new int[2];
+        int i = 0;
+        for (int num : set) {
+            res[i++] = num;
+        }
+
+        Arrays.sort(res);
+        return res;
+    }
+}
