@@ -1,0 +1,17 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/batch/gfg-160-problems/track/bit-manipulation-bonus-problems/problem/sum-of-xor-of-all-possible-subsets
+
+//////////Solution
+
+// User function Template for Java
+class Solution {
+    int subsetXORSum(int arr[]) {
+        // code here
+        int result = 0;
+        for(int num : arr){
+            result |= num;
+        }
+        return result << (arr.length -1);
+    }
+}
