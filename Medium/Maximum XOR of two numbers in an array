@@ -1,0 +1,70 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/maximum-xor-of-two-numbers-in-an-array/1
+
+//////////Solution
+
+class Trie{
+    Trie one,zero;
+}
+class Solution {
+    int n;
+    private void build(Trie root,int element){
+        Trie curr=root;
+        for(int i=31;i>=0;i--){
+            int bit=(element>>i) & (1);
+            if(bit==0){
+                if(curr.zero==null){
+                    Trie newnode=new Trie();
+                    curr.zero=newnode;
+                }
+                curr=curr.zero;
+            }else{
+                if(curr.one==null){
+                    Trie newnode=new Trie();
+                    curr.one=newnode;
+                }
+                curr=curr.one;
+            }
+        }
+    }
+    private int maxans(Trie root,int num){
+        Trie curr=root;
+        int ans=0;
+        for(int i=31;i>=0;i--){
+            int bit=(num>>i) & 1;
+            if(bit==1){
+                if(curr.zero!=null){
+                    ans=(ans | (1<<i));
+                    curr=curr.zero;
+                }else{
+                    curr=curr.one;
+                }
+            }
+            else{
+                if(curr.one!=null){
+                    ans=(ans | (1<<i));
+                    curr=curr.one;
+                }else{
+                    curr=curr.zero;
+                }
+            }
+        }
+        return ans;
+    }
+    
+    public int maxXor(int[] arr) {
+        // code here
+        Trie root=new Trie();
+        int ans=0;
+        n=arr.length;
+        for(int i=0;i<n;i++){
+            build(root,arr[i]);
+        }
+        
+        for(int i=1;i<n;i++){
+            ans=Math.max(ans,maxans(root,arr[i]));
+        }
+        return ans;
+    }
+} 
