@@ -1,0 +1,49 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/given-a-linked-list-of-0s-1s-and-2s-sort-it/1
+
+//////////Solution
+
+/* class Node
+{
+    int data;
+    Node next;
+    Node(int data)
+    {
+        this.data = data;
+        next = null;
+    }
+}*/
+class Solution {
+    static Node segregate(Node head) {
+    Node zeroH = new Node(-1);
+    Node oneH = new Node(-1);
+    Node twoH = new Node(-1);
+    Node zero  = zeroH;
+    Node one = oneH;
+    Node two = twoH;
+
+    while (head != null) {
+        if (head.data == 0) {
+            zero.next = head;
+            zero = zero.next;
+        } else if (head.data == 1) {
+            one.next = head;
+            one = one.next;
+        } else {
+            two.next = head;
+            two = two.next;
+        }
+        head = head.next;
+    }
+
+    // Important fix: terminate the list
+    two.next = null;
+
+    // Combine the lists
+    one.next = twoH.next;
+    zero.next = oneH.next;
+
+    return zeroH.next;
+}
+}
