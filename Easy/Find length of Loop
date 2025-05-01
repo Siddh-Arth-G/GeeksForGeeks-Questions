@@ -1,0 +1,41 @@
+//////////Question Link
+
+https://www.geeksforgeeks.org/problems/find-length-of-loop/1
+
+//////////Solution
+
+/*
+class Node
+{
+    int data;
+    Node next;
+    Node(int d) {data = d; next = null; }
+}
+*/
+
+class Solution {
+    // Function to find the length of a loop in the linked list.
+    public int countNodesinLoop(Node head) {
+        // code here.
+        Node slow = head;
+        Node fast = head;
+        if(slow.next == slow) return 1;
+        if(slow.next == null || slow.next.next == null) return 0;
+        slow = slow.next;
+        fast = slow.next;
+        
+        while(slow != fast){
+            if(fast == null || fast.next == null) return 0;
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        int cnt = 1;
+        slow = slow.next;
+        while(slow != fast){
+            slow = slow.next;
+            cnt++;
+        }
+        return cnt;
+        
+    }
+}
